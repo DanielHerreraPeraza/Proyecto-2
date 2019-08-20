@@ -1,0 +1,254 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vProductos.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Seccion <span>Productos de servicio</span></h2>
+
+                        <p>Esta vista permite dar mantenimiento a los productos.</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarProductos">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaProductos">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaProductos" class="d-inine">
+                                    @Html.CtrlTable(viewName: "vProductos", id: "tblProductos", title: "Lista de productos de servicio",
+     columnsTitle: "Código,Nombre,Precio,Cantidad de productos,Categoría,Tipo de impuesto,Impuesto,Estado", ColumnsDataName: "Codigo,Nombre,Precio,CantProductos,Categoria,TipoImpuesto,Impuesto,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="registrarProductos" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "txtCodigo", type: "text", label: "Código",
+                                                                    placeHolder: "Código del producto", columnDataName: "Codigo")
+                                                            
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            @Html.CtrlInput(id: "txtNombre", type: "text", label: "Nombre",
+                                                                   placeHolder: "Nombre del producto", columnDataName: "Nombre")
+                                                            
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "txtDescripcion", type: "text", label: "Descripción",
+                                                                  placeHolder: "Descripción del producto", columnDataName: "Descripcion")
+                                                          
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                           
+                                                            @Html.CtrlInput(id: "txtProveedor", type: "text", label: "Proveedor",
+                                                                 placeHolder: "Proveedor del producto", columnDataName: "Proveedor")
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "txtPrecio", type: "text", label: "Precio",
+                                                                 placeHolder: "Precio del producto", columnDataName: "Precio")
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            @Html.CtrlInput(id: "txtCantProductos", type: "text", label: "Cant.productos",
+                                                                   placeHolder: "Cantidad de productos", columnDataName: "CantProductos")
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelCategoria">Categoría</label>
+                                                                </div>
+                                                                <select class="form-control" id="dpCategorias" name="Categorias" ColumnDataName="Categoria">
+                                                                    
+                                                                   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelImpuesto">Tipo de impuesto</label>
+                                                                </div>
+                                                                <select class="form-control" id="dpTipoImpuesto" name="TipoImpuesto" ColumnDataName="TipoImpuesto">
+
+
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                              
+
+                                                <div class="form-row" style="margin: 20px auto;">
+                                                    <div class="col-lg-6">
+
+                                                        <div class="input-group mb-3">
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div style="margin: 60px 0;">
+
+                                                        <img id="fotoProducto" src="https://res.cloudinary.com/datatek/image/upload/v1564297011/Imagenes%20default/producto_f7ylyd.png" style="width:120px; height:120px; margin-right: 30px;" />
+                                                        <a href="#" id="upload_widget_opener" style="display: none;">Pulse aquí</a>
+                                                        @Html.CtrlButton(viewName: "vProductos", type: "button", id: "btnFotoPerfilServicio", label: "Agregar foto de perfil", onClickFunction: "AgregarFoto", buttonType: "info")
+
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </form>
+
+
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vProductos", id: "btnRegistrar", type: "button", label: "Registrar", onClickFunction: "ValidarInputs", buttonType: "color")
+                                        </div>
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarProductos" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+                                        <form class="" id="frmEdition">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            <fieldset disabled />
+                                                            @Html.CtrlInput(id: "modCodigo", type: "text", label: "Código",
+                                                                    placeHolder: "Código del producto", columnDataName: "Codigo")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modNombre", type: "text", label: "Nombre",
+                                                                    placeHolder: "Nombre", columnDataName: "Nombre")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modDescripcion", type: "text", label : "Descripción",
+                                                                    placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modProveedor", type: "text", label: "Proveedor",
+                                                                    placeHolder: "Proveedor del servicio", columnDataName: "Proveedor")
+                                                        </div>
+                                                        <div class="col-lg-6">
+
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelCategoria">Categoría</label>
+                                                                </div>
+                                                                <select class="form-control" id="dpModCategorias" name="Categorias" ColumnDataName="Categoria"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modPrecio", type: "text", label: "Precio",
+                                                                    placeHolder: "Precio del producto", columnDataName: "Precio")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modCantProductos", type: "number", label: "Cantidad de productos",
+                                                                    placeHolder: "Cantidad de productos", columnDataName: "CantProductos")
+                                                        </div>
+
+                                                        
+                                                        <div class="col-lg-6">
+
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelImpuesto">Tipo de impuesto</label>
+                                                                </div>
+                                                                <select class="form-control" id="dpModTipoImpuesto" name="TipoImpuesto" ColumnDataName="TipoImpuesto"></select>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlDropDown(id: "txtEstado", label: "Estado", listId: "LST_ESTADO_PRODUCTOS", columnDataName: "ValorEstado")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row" style="margin: 20px auto;">
+                                                <div style="margin: 60px auto;">
+                                                    <img style="margin-right: 20px; width:120px; height:120px;" id="modFotoProducto" src="https://res.cloudinary.com/datatek/image/upload/v1562818933/Imagenes%20default/4664c07adf55e078259aed9574a00b22_z1gkws.png" />
+                                                    <a href="#" id="upload_widget">Pulse aquí</a>
+
+                                                    @Html.CtrlButton(viewName: "vProductos", type: "button", id: "btnModFotoPP", label: "Modificar foto de perfil", onClickFunction: "ModFotoPerfil", buttonType: "info")
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vProductos", type: "button", id: "btnModificar", label: "Modificar Producto", onClickFunction: "Update", buttonType: "color")
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+                            
+
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vProductos", type: "button", id: "btnIrListaServicios", label: "Volver a lista de servicios", onClickFunction: "IrListaServicios", buttonType: "color")
+                                        </div>
+                            </div><!-- end columns -->
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

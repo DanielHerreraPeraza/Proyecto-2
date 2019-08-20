@@ -1,0 +1,122 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vRegistroUsuarios.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<div class="dashboard-heading">
+    <h2>Registro <span>Usuario</span></h2>
+</div><!-- end dashboard-heading -->
+<div class="custom-form custom-form-fields text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3>Formulario</h3>
+        </div>
+        <div class="row justify-content-center">
+            <p>Por favor complete la información que se le solicita a continuación.</p>
+        </div>
+    </div>
+
+    <form id="frmEdition" method="get" action="">
+        <div class="row align-content-sm-center">
+            <div class="col-sm-12">
+
+                <h5>Personal</h5>
+                <div class="form-row">
+                    <div class="col-lg-6">
+                        @Html.CtrlIconInput(id: "txtIdentificacion", type: "text", icon: "fa fa-id-card", required: true,
+                                placeHolder: "Identificación", columnDataName: "Identificacion")
+                    </div>
+                </div>
+
+                <div class="form-row mb-lg-4">
+                    <div class="col-md-3">
+                        @Html.CtrlIconInput(id: "txtPrimerNombre", type: "text", icon: "fa fa-user", required: true,
+                                placeHolder:"Primer nombre", columnDataName: "PrimerNombre")
+                    </div>
+                    <div class="col-md-3">
+                        @Html.CtrlIconInput(id: "txtSegundoNombre", type: "text", icon: "fa fa-user", required: true,
+                                placeHolder:"Segundo nombre", columnDataName: "SegundoNombre")
+                    </div>
+                    <div class="col-md-3">
+                        @Html.CtrlIconInput(id: "txtPrimerApellido", type: "text", icon: "fa fa-user", required: true,
+                                placeHolder:"Primer apellido", columnDataName: "PrimerApellido")
+                    </div>
+                    <div class="col-md-3">
+                        @Html.CtrlIconInput(id: "txtSegundoApellido", type: "text", icon: "fa fa-user", required: true,
+                                placeHolder:"Segundo apellido", columnDataName: "SegundoApellido")
+                    </div>
+                </div>
+
+                <h5>Contacto</h5>
+
+                <div class="form-row mb-lg-4">
+                    <div class="col-lg-6">
+                        @Html.CtrlIconInput(id: "txtCorreo", type: "text", icon: "fa fa-envelope", required: true,
+                                placeHolder: "Correo", columnDataName: "Correo")
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.CtrlIconInput(id: "txtTelefono", type: "text", icon: "fa fa-phone", required: true,
+                                placeHolder: "Teléfono", columnDataName: "Telefono")
+                    </div>
+                </div>
+
+                <h5>Dirección</h5>
+
+                <div class="form-row mb-lg-4">
+                    <div class="col-md-4">
+                        @Html.CtrlDropDown(id: "txtProvincia", label: "Provincia", listId: "LST_PROVINCIA", columnDataName: "Provincia")
+                    </div>
+                    <div class="col-md-4">
+                        @Html.CtrlDropDown(id: "txtCanton", label: "Cantón", listId: "LST_CANTON", columnDataName: "Canton")
+                    </div>
+                    <div class="col-md-4">
+                        @Html.CtrlDropDown(id: "txtDistrito", label: "Distrito", listId: "LST_DISTRITO", columnDataName: "Distrito")
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.CtrlIconInput(id: "txtDireccionExacta", type: "text", icon: "fa fa-map-marker", required: true,
+                                placeHolder: "Dirección exacta", columnDataName: "DireccionExacta")
+                    </div>
+                </div>
+
+                <h5>Seguridad</h5>
+
+                <div class="form-row mb-lg-4">
+                    <div class="col-lg-6">
+                        @Html.CtrlIconInput(id: "txtContrasenna", type: "password", icon: "fa fa-lock", required: true,
+                                placeHolder: "Contraseña", columnDataName: "Contrasenna")
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.CtrlIconInput(id: "txtConfContrasenna", type: "password", icon: "fa fa-lock", required: true,
+                                placeHolder: "Confirmar contraseña", columnDataName: "")
+                    </div>
+                </div>
+
+                <div id="divRol" class="form-row mb-lg-4">
+                    <div class="col-lg-6">
+                        @Html.CtrlMultipleSelect(id: "txtRol", label: "Rol", listId: "LST_ROL", columnDataName: "Roles")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @Html.CtrlButton(viewName: "vRegistroUsuarios", id: "btnRegistrar", type: "button", label: "Registrar", onClickFunction: "ValidarInputs", buttonType: "color")
+    </form>
+
+    <div class="other-links">
+        <p class="link-line">¿Ya tiene una cuenta? <a href="/home/vLogin">Iniciar sesión</a></p>
+    </div><!-- end other-links -->
+</div><!-- end form-content -->
+
+<input type="text" id="txtIdSolicitud" class="d-none">
+<script>
+    $(document).ready(function () {
+        var vusuario = new vRegistroUsuarios()
+        document.getElementById("txtIdSolicitud").value = "@ViewBag.IdSolicitud";
+
+        vusuario.ObtenerSolicitud();
+
+    });
+</script>
+

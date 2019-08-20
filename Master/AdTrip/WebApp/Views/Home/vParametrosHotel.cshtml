@@ -1,0 +1,108 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vParametrosHotel.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<div class="container">
+    <div class="dashboard-heading">
+        <h2>Datos <span>Parametrizables de Hotel</span></h2>
+    </div><!-- end dashboard-heading -->
+    <div class="custom-form custom-form-fields text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <h3>Datos</h3>
+            </div>
+            <div class="row justify-content-center">
+                <p>
+                    Puede modificar lo siguientes datos.
+                    Estos afectarán directamente a los clientes.
+                    Los clientes pueden ver los datos modificados una vez guarde los cambios
+                </p>
+            </div>
+        </div>
+
+        <form class="" id="frmEdition">
+            <div class="row align-content-sm-center d-flex">
+                <div class="col-sm-12">
+                    <h5>Credenciales</h5>
+                    <div class="row mb-lg-4">
+                        <div class="col-lg-6">
+                            <fieldset disabled/>
+                                @Html.CtrlInput(id: "txtIdHotel", type: "text", label: "Cédula ",
+                                        placeHolder: "Cédula jurídica del hotel", columnDataName: "IdHotel")
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.CtrlInput(id: "txtComision", type: "number", label: "Comisión"
+                                    , columnDataName: "Comision")
+                        </div>
+                    </div>
+                    <h5>Mensaje(SMS) de bienvenida</h5>
+                    <h6>Este mensaje se le mandará al usuario un día antes de que empiece una reservación en un hotel</h6>
+                    <div class="row mb-lg-4">
+                        <div class="col-lg-12">
+                            @Html.CtrlInput(id: "txtMensaje", type: "text", label: "Mensaje",
+                                    placeHolder: "Mensaje de bienvenida", columnDataName: "Mensaje")
+                        </div>
+                    </div>
+                    <h5>Política de devolución</h5>
+                    <h6>
+                        Los siguientes datos son los que define en que periodo se le permite devolver el saldo a los usuarios
+                    </h6>
+
+                    <div class="row mb-lg-4">
+                        <div class="col-md-12">
+                            @Html.CtrlTextArea(id: "txtDescripcion", type: "text", label: "Descripción",
+                                      placeHolder: "Descripción de la politica", columnDataName: "Politica")
+                        </div>
+                        <div class="col-md-6">
+                            @Html.CtrlInput(id: "txtPorcentaje", type: "number", label: "Porcentaje",
+                                    placeHolder: "Porciento de devolución", columnDataName: "Porciento")
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.CtrlInput(id: "txtDias", type: "number", label: "Días",
+                                    placeHolder: "Días antes de la reserva", columnDataName: "Dias")
+                        </div>
+                    </div>
+                    <div class="text-left">
+                        <ul> Indicaciones:
+                            <li>
+                                Descripción: lo que verán los usuarios cuando quieran cancelar una reserva.
+                            </li>
+                            <li>
+                                Porcentaje: el porcentaje del valor de la reserva que se le podrá devolver al usuario
+                            </li>
+                            <li>
+                                Días: si el usuario cancela días antes del límite no se le devolverá nada.
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </form>
+        @Html.CtrlButton(viewName: "vParametrosHotel", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "ValidarInputs", buttonType: "success")
+        @Html.CtrlButton(viewName: "vParametrosHotel", id: "btnCancelar", type: "button", label: "Cancelar", onClickFunction: "volverPerfil", buttonType: "danger")
+
+
+    </div><!-- end form-content -->
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var vParametroshotel = new vParametrosHotel();
+        document.getElementById("txtIdHotel").value = "@ViewBag.IdHotel";
+        vParametroshotel.ObtenerParametros();
+
+    });
+
+</script>

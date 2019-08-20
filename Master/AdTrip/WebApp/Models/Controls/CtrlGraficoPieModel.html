@@ -1,0 +1,78 @@
+﻿
+
+<script>
+
+
+    function -#OnInitializeChart-(vData) {
+
+
+        var datos = [];
+        var labels = [];
+        var colores = [];
+
+
+        function randomColor() {
+            color = 'rgb(' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ', 0.7)';
+            return color;
+        }
+
+        for (var i in vData) {
+            datos.push(vData[i].CantHab);
+            labels.push(vData[i].NomHotel);
+            colores.push(randomColor());
+        }
+
+        var ctx = document.getElementById('-#Id-').getContext('2d');
+
+        var myPieChart = new Chart(ctx, {
+            type: '-#ChartType-',
+            data: {
+                datasets: [{
+                    data: datos,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: labels,
+                fontSize: 20
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: '-#Title-',
+                    fontSize: 27,
+                    fontColor: '#000',
+                    padding: 32,
+                    fontFamily: 'Merriweather, serif'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
+        
+    }
+
+    $(document).ready(function () {
+
+        var view = new -#ViewName-();
+        if (view != undefined) {
+            view.-#OnLoadFunction-(-#OnInitializeChart-);
+        }
+
+    });
+
+</script>
+
+<canvas id="-#Id-"style="width: 560px;display: inline-block;height: 280px;" width="600" height="300"></canvas>

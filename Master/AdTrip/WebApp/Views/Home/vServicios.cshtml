@@ -1,0 +1,232 @@
+﻿@using WebApp.Helpers;
+<link src="~/Content/vServicios.css" rel="stylesheet" />
+<script src="~/Scripts/Views/vServicios.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Sección <span>Servicios de</span> <span class="nombreHotel"></span> </h2><span id="nombreHotel"></span>
+                        <p>Esta vista permite dar mantenimineto a los servicios de <span class="nombreHotel"></span> </p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarServicios">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaServicios">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                                <button type="button" onclick="VolverModificarHotel()" name="volver atrás" value="volver atrás" class="btn btn-color"> Volver atrás</button>
+
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaServicios" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vServicios", id: "tblServicios", title: "Lista de servicios del hotel",
+     columnsTitle: "Código,Nombre,Descripción,Estado", ColumnsDataName: "Codigo,Nombre,Descripcion,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="registrarServicios" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+
+                                                            @Html.CtrlIconInput(id: "txtCodigo", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Código del servicio", columnDataName: "Codigo")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtNombre", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Nombre", columnDataName: "Nombre")
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtDescripcion", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-row" style="margin: 20px auto;">
+                                                <div style="margin: 60px auto;">
+                                                    <img style="margin-right: 20px; min-width:150px; max-width:150px; max-height:150px; min-height:150px;" id="fotoServicio" src="https://res.cloudinary.com/datatek/image/upload/v1564296888/Imagenes%20default/servicio_vtwcoj.png" />
+                                                    @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btnFotoPerfilServicio", label: "Agregar foto de perfil", onClickFunction: "AgregarFotoPerfil", buttonType: "info")
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h3>Fotos de los servicios</h3>
+                                                <div class="card-body">
+                                                    <div class="col-12">
+                                                        <table class="table" id="tabla_fotos_servicio">
+                                                            <thead>
+                                                                <tr></tr>
+                                                            </thead>
+                                                            <tbody id="imagenesServicio"></tbody>
+                                                        </table>
+                                                    </div>
+                                                    @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btnFotoServicio", label: "Agregar foto", onClickFunction: "AgregarFoto", buttonType: "info")
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        </form>
+
+
+
+
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vServicios", id: "btnRegistrar", type: "button", label: "Registrar", onClickFunction: "ValidarInputs", buttonType: "color")
+                                        </div>
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarServicios" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Los cambios serán modificados de manera inmediata.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            <fieldset disabled />
+                                                            @Html.CtrlInput(id: "modCodigo", type: "text", label: "Código servicio",
+                                                        placeHolder: "Código", columnDataName: "Codigo")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modNombre", type: "text", label: "Nombre servicio",
+                                                                    placeHolder: "Nombre", columnDataName: "Nombre")
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlInput(id: "modDescripcion", type: "text", label: "Descripción servicio",
+                                                                    placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlDropDown(id: "txtEstado", label: "Estado", listId: "LST_ESTADO_SERVICIOS", columnDataName: "ValorEstado")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row" style="margin: 20px auto;">
+                                                <div style="margin: 5% 35%;" class="gallery-block">
+                                                    <h4 style="padding-bottom:8%">Foto de perfil actual</h4>
+                                                    <div class="gallery-img" style="">
+                                                        <img style="width:100%" id="modFotoServicio" src="https://res.cloudinary.com/datatek/image/upload/v1562798986/Imagenes%20default/servicios_ohqi7k.png" />
+                                                        <div class="gallery-mask" style="height:30%; top:0; right:0; transition:none;">
+                                                            <button type="button" id="btnModFotoPS" onclick="ModFotoPerfil()" title="Modificar foto de perfil" class="image-link" style="transform:none; top:0%; right:10px; margin-top:2%; background-color:transparent; border:none;">
+                                                                <span>
+                                                                    <i class="fa fa-edit"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div><!-- end gallery-img -->
+                                                </div>
+                                            </div>
+
+                                            <div>
+
+
+                                                <div class="mfp-zoom-out-cur">
+                                                    <div id="gallery-page" style="margin-bottom:0;" class="innerpage-section-padding galeria-fotos">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                                    <div class="page-heading vServicio">
+                                                                        <h3>Fotos del servicio</h3>
+                                                                        <hr class="heading-line" />
+                                                                    </div><!-- end page-heading -->
+
+
+                                                                </div><!-- end columns -->
+                                                            </div><!-- end row -->
+                                                        </div><!-- end container -->
+                                                    </div><!-- end gallery-page -->
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <table class="table" id="tabla_fotos_servicio">
+                                                    <thead>
+                                                        <tr>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="modImgsServicio"></tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-body">
+                                                <a href="#" id="upload_widget_opener" style="display: none;">Pulse aquí</a>
+                                                @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btImgServicio", label: "Agregar nueva foto", onClickFunction: "AgregarNuevaFoto", buttonType: "info")
+                                            </div>
+
+
+                                            <div class="row" id="galeriaServicios">
+
+                                            </div><!-- end row -->
+
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btnModificar", label: "Modificar Servicio", onClickFunction: "Update", buttonType: "color")
+                                        </div>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btnMostrarPerfil", label: "Ver perfil de servicio", onClickFunction: "IrPerfilServicio", buttonType: "info")
+                                            @Html.CtrlButton(viewName: "vServicios", type: "button", id: "btnVerProductos", label: "Ver productos", onClickFunction: "VerProductos", buttonType: "info")
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+                            </div><!-- end columns -->
+                        </div><!-- end row -->
+
+                    </div><!-- end dashboard-wrapper -->
+
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

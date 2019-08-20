@@ -1,0 +1,47 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vBitacora.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Sección <span>Bitácora</span></h2>
+                        
+                        <p>Esta vista permite dar un seguimiento a las acciones realizadas en la plataforma.</p>
+                    </div>
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+
+                                    <li class="nav-item active" role="presentation" data-div="listaBitacora">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaBitacora" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vBitacora", id: "tblBitacora", title: "Bitácora de actividad",
+                                    columnsTitle: "Fecha, Acción, Controlador, Tipo usuario, Usuario", ColumnsDataName: "Fecha,TipoAction,Controller,RolUsuario,CorreoUsuario", onSelectFunction: "BindFields", colorHeader:"red")
+
+                                </div>
+
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section>

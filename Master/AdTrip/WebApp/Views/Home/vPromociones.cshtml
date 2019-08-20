@@ -1,0 +1,176 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vPromociones.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Seccion <span>Promociones</span></h2>
+
+                        <p>Esta vista permite dar mantenimiento a las promociones.</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarPromociones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaPromociones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaPromociones" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vPromociones", id: "tblPromociones", title: "Promociones",
+    columnsTitle: "Código,Cantidad Disponible, Fecha de Inicio, Fecha final,Descuento, Tipo de promoción,Estado", ColumnsDataName: "Codigo,CantDisponible,FechaInicio,FechaFin,Descuento,ValorTipoPromocion,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="crearPromociones" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate" method="get" action="">
+                                            <div class="col-sm-12 text-center">
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtCodigo", type: "text", icon: "fa fa-id-card", required: true,
+                                                                placeHolder: "Código", columnDataName: "Codigo")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtCantDisponible", type: "number", icon: "fa fa-id-card", required: true,
+                                                                placeHolder: "Cantidad disponible", columnDataName: "CantDisponible")
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtFechaInicio", type: "date", icon: "fa fa-hotel", required: true,
+                                                                placeHolder:"Fecha de inicio", columnDataName: "FechaInicio")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtFechaFin", type: "date", icon: "fa fa-hotel", required: true,
+                                                                placeHolder: "Fecha final", columnDataName: "FechaFin")
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtDescuento", type: "number", icon: "fa fa-hotel", required: true,
+                                                                placeHolder:"Descuento", columnDataName: "Descuento")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                       
+                                                        @Html.CtrlDropDown(id: "txtTipoPromocion", label: "Tipo de promoción", listId: "LST_TIPO_PROMOCION", columnDataName: "ValorTipoPromocion")
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vPromociones", id: "btnCreate", type: "button", label: "Registrar", onClickFunction: "ValidarInputsCrear", buttonType: "color")
+                                            </div>
+                                        </form>
+
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarPromociones" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition" method="get" action="">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtCodigo", type: "text", label: "Código",
+                                                                            placeHolder: "Código", columnDataName: "Codigo")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlInput(id: "txtCantDisponible", type: "number", label: "Cantidad disponible",
+                                                                        placeHolder: "Cantidad disponible", columnDataName: "CantDisponible")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlInput(id: "txtFechaInicio", type: "date", label: "Fecha de Inicio",
+                                                                        placeHolder: "Fecha de inicio", columnDataName: "FechaInicio")
+
+                                                            </div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlInput(id: "txtFechaFin", type: "date", label: "Fecha final",
+                                                                        placeHolder: "Fecha final", columnDataName: "FechaFin")
+
+                                                            </div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlInput(id: "txtDescuento", type: "number", label: "Descuento",
+                                                                        placeHolder: "Descuento", columnDataName: "Descuento")
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlDropDown(id: "txtTipoPromocion", label: "Tipo de promoción", listId: "LST_TIPO_PROMOCION", columnDataName: "TipoPromocion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlDropDown(id: "txtUEstado", label: "Estado", listId: "LST_ESTADO_HABITACIONES", columnDataName: "ValorEstado")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vPromociones", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "ValidarInputsModificar", buttonType: "info")
+                                                @Html.CtrlButton(viewName: "vPromociones", id: "btnEliminar", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+
+
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

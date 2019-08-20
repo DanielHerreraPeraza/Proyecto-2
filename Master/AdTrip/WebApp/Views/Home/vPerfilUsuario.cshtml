@@ -1,0 +1,221 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vPerfilUsuario.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Perfil <span>Usuario</span></h2>
+                        <p></p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item active" role="presentation" data-div="perfil">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Perfil</a>
+                                    </li>
+                                    <li class="nav-item reservaciones" role="presentation" data-div="reservaciones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-briefcase"></i></span>Reservaciones</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+
+
+                                <div class="d-inline" id="perfil">
+                                    <h1 class="page-title" id="P_NombreUsuario"></h1>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-5 col-md-4 user-img">
+                                                    <img src="https://res.cloudinary.com/datatek/image/upload/c_scale,w_300/v1563736384/m4n7ffb9mzs1ra9znha7.png" class="img-responsive" alt="user-img" />
+                                                </div><!-- end columns -->
+
+                                                <div class="col-sm-7 col-md-8  user-detail">
+                                                    <h5 class="page-item" id="P_Identificacion"><span><!--<i class="fa fa-id-card"></i>--></span> Identificación:  </h5>
+                                                    <h5 class="page-item" id="P_SegundoNombre"><span><!--<i class="fa fa-id-card"></i>--></span> Segundo nombre:  </h5>
+                                                    <h5 class="page-item" id="P_Apellido"><span><!--<i class="fa+ fa-id-card"></i>--></span> Apellido:  </h5>
+                                                    <h5 class="page-item" id="P_SegundoApellido"><span><!--<i class="fa fa-id-card"></i>--></span> Segundo apellido:  </h5>
+
+                                                    <h5 class="page-item" id="P_Telefono"><span><!--<i class="fa fa-mobile-alt"></i>--></span> Telefono:  </h5>
+                                                    <h5 class="page-item" id="P_Correo"><span><!--<i class="fa fa-envelope-square"></i>--></span> Correo:  </h5>
+                                                    <h5 class="page-item" id="P_Calificaciones"><span><!--<i class="fa fa-star orange"></i>--></span> Calificaciones:  </h5>
+                                                    <ul class="list-unstyled">
+                                                        <li class="list-inline-item rating" id="P_Calificaciones">
+                                                            <span><!--<i class="fa fa-star"></i>--></span> Clasificación:
+                                                            <span><i class="fa fa-star lightgrey"></i></span>
+                                                            <span><i class="fa fa-star lightgrey"></i></span>
+                                                            <span><i class="fa fa-star lightgrey"></i></span>
+                                                            <span><i class="fa fa-star lightgrey"></i></span>
+                                                            <span><i class="fa fa-star lightgrey"></i></span>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="list-unstyled"></ul>
+                                                    <button class="btn btn-color" data-toggle="modal" data-target="#edit-profile">Modificar</button>
+
+                                                </div><!-- end columns -->
+
+                                                <div class="col-sm-12 user-desc">
+
+                                                    <h4>Dirección</h4>
+                                                    <p id="P_Direccion"></p>
+                                                    <!--
+                                                    <h5 class="page-item" id="P_Provincia">Provincia: </h5>
+                                                    <h5 class="page-item" id="P_Canton">Cantón: </h5>
+                                                    <h5 class="page-item" id="P_Distrito">Distrito: </h5>
+                                                    -->
+                                                </div><!-- end columns -->
+                                            </div><!-- end row -->
+
+                                        </div><!-- end panel-body -->
+                                    </div><!-- end panel-detault -->
+                                </div><!-- end columns -->
+
+
+
+                                <div class="col-12 col-md-10 col-lg-10 dashboard-content booking-trips d-none" id="reservaciones">
+                                    <h2 class="dash-content-title">Mis reservas</h2>
+                                    <div class="dashboard-listing booking-listing">
+                                        <div class="dash-listing-heading">
+
+                                        </div>
+
+                                        <div class="table-responsive">
+                                            <table class="table table-hover display table-bordered h" id="tblReservas">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="infoReservas">
+                                                  
+                                                 </tbody>
+                                            </table>
+                                        </div><!-- end table-responsive -->
+                                    </div><!-- end booking-listings -->
+
+                                </div><!-- end columns -->
+                            </div> <!--end home-content-->
+                            <div id="edit-profile" class="modal custom-modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h3 class="modal-title">Modificar perfil</h3>
+                                        </div><!-- end modal-header -->
+
+                                        <form class="" id="frmEdition" method="get" action="">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+                                                            <h5>Personal</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtIdentificacion", type: "text", label: "Identificación",
+                                                                            placeHolder: "Identificación", columnDataName: "Identificacion")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtPrimerNombre", type: "text", label: "Primer Nombre",
+                                                                    placeHolder:"Primer nombre", columnDataName: "PrimerNombre")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtSegundoNombre", type: "text", label: "Segundo nombre",
+                                                                    placeHolder:"Segundo nombre", columnDataName: "SegundoNombre")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtPrimerApellido", type: "text", label: "Primer apellido",
+                                                                    placeHolder:"Primer apellido", columnDataName: "PrimerApellido")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtSegundoApellido", type: "text", label: "Segundo apellido",
+                                                                    placeHolder:"Segundo apellido", columnDataName: "SegundoApellido")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Contacto</h5>
+                                                            <div class="w-50"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtCorreo", type: "email", label: "Correo",
+                                                                            placeHolder: "Correo", columnDataName: "Correo")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtTelefono", type: "text", label: "Teléfono",
+                                                                        placeHolder: "Teléfono", columnDataName: "Telefono")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Dirección</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-4">
+                                                                @Html.CtrlDropDown(id: "txtProvincia", label: "Provincia", listId: "LST_PROVINCIA", columnDataName: "Provincia")
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                @Html.CtrlDropDown(id: "txtCanton", label: "Cantón", listId: "LST_CANTON", columnDataName: "Canton")
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                @Html.CtrlDropDown(id: "txtDistrito", label: "Distrito", listId: "LST_DISTRITO", columnDataName: "Distrito")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-12">
+                                                                @Html.CtrlInput(id: "txtDireccionExacta", type: "text", label: "Dirección exacta",
+                                                                        placeHolder: "Dirección Exacta", columnDataName: "DireccionExacta")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Otros</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtCalificacion", type: "text", label: "Calificación",
+                                                                            placeHolder: "Calificación", columnDataName: "Calificacion")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlDropDown(id: "txtEstado", label: "Estado", listId: "LST_ESTADO_USUARIOS", columnDataName: "ValorEstado")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vPerfilUsuario", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "ValidarInputsModificar", buttonType: "info")
+                                            </div>
+                                        </form>
+                                    </div><!-- end modal-bpdy -->
+                                </div><!-- end modal-content -->
+                            </div><!-- end edit-profile -->
+                        </div><!-- end dashboard-wrapper -->
+                    </div>
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->
+
+<style>
+    .modal-content {
+        width: 850px;
+        align-content: center;
+    }
+
+    .custom-modal .modal-dialog {
+        width: auto;
+    }
+</style>

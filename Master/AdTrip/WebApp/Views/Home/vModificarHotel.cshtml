@@ -1,0 +1,184 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vModificarHotel.js"></script>
+<script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAofdaW7YU94ABs41661bBEA59VRnl0QIE'></script>
+<script src="~/Scripts/locationpicker.jquery.js"></script>
+<script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js' type='text/javascript'></script>
+<script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<div class="container">
+    <div class="dashboard-heading">
+        <h2>Modificar datos de <span>Hotel</span></h2>
+    </div><!-- end dashboard-heading -->
+    <div class="custom-form custom-form-fields text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <h3>Datos</h3>
+            </div>
+            <div class="row justify-content-center">
+                <p>Solo puedes modificar los datos q están es un color claro</p>
+            </div>
+        </div>
+
+        <form class="" id="frmEdition">
+            <div class="row align-content-sm-center d-flex">
+                <div class="col-sm-12">
+
+                    <h5>Legales</h5>
+                    <div class="row mb-lg-4">
+                        <div class="col-lg-6">
+                            @Html.CtrlInput(id: "txtCedulaJ", type: "text", label: "Cédula jurídica",
+                                    placeHolder: "Cédula jurídica", columnDataName: "CedulaJuridica")
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.CtrlInput(id: "txtClasificacion", type: "text", label: "Clasificación",
+                                    placeHolder: "Clasificación(estrellas)", columnDataName: "Clasificacion")
+                        </div>
+                    </div>
+                    <h5>Hotel</h5>
+
+                    <div class="row mb-lg-4">
+                        <div class="col-md-6">
+                            @Html.CtrlInput(id: "txtNombre", type: "text", label: "Nombre",
+                                      placeHolder: "Nombre", columnDataName: "Nombre")
+                        </div>
+                        <div class="col-md-6">
+                            @Html.CtrlInput(id: "txtCadena", type: "text", label: "Cadena",
+                                    placeHolder: "Cadena", columnDataName: "Cadena")
+                        </div>
+                        <div class="col-lg-12">
+
+                            @Html.CtrlTextArea(id: "txtDescripcion", type: "text", label: "Descripción",
+                                    placeHolder: "Descripción", columnDataName: "Descripcion")
+                        </div>
+                        <!-- ubicación -->
+                        <div class="col-lg-6 mt-3">
+                            <!-- mapa -->
+                            <div id="Gmap" style="height: 400px; width: 100%;"> </div>
+                        </div>
+
+                        <div class="col-lg-6 mt-3">
+
+                            @Html.CtrlDropDown(id: "txtProvincia", label: "Provincia", listId: "LST_PROVINCIA", columnDataName: "Provincia")
+                            @Html.CtrlDropDown(id: "txtCanton", label: "Cantón", listId: "LST_CANTON", columnDataName: "Canton")
+                            @Html.CtrlDropDown(id: "txtDistrito", label: "Distrito", listId: "LST_DISTRITO", columnDataName: "Distrito")
+                            @Html.CtrlInput(id: "txtDireccion", type: "text", label: "Dirección",
+                                placeHolder: "Dirección exacta", columnDataName: "Direccion")
+                            @Html.CtrlIconInput(id: "txtLatitud", type: "text", icon: "fa fa-map-marker", required: true,
+                               placeHolder: "Latitud", columnDataName: "UbicacionX")
+                            @Html.CtrlIconInput(id: "txtLongitud", type: "text", icon: "fa fa-map-marker", required: true,
+                                placeHolder: "Longitud", columnDataName: "UbicacionY")
+                        </div>
+                    </div>
+                    <h5>Contacto</h5>
+                    <div class="form-row">
+                        <div class="col-lg-4">
+                            @Html.CtrlInput(id: "txtCorreo", type: "text", label: "Correo",
+                                    placeHolder:"Correo electrónico", columnDataName: "Correo")
+                        </div>
+                        <div class="col-lg-4">
+                            @Html.CtrlInput(id: "txtTelefonos", type: "text", label: "Teléfonos",
+                                    placeHolder:"Teléfono", columnDataName: "Telefonos")
+                        </div>
+                        <div class="col-lg-4">
+                            @Html.CtrlInput(id: "txtSitio", type: "text", label: "Sitio Web",
+                                    placeHolder: "URL Sitio web", columnDataName: "URLSitio")
+                        </div>
+
+                    </div>
+                    <!-- Fotos -->
+                    <div class="form-row">
+
+                        <!-- Fotos cloud-->
+                        <div class="col-lg-6">
+                            <div hidden>
+                                @Html.CtrlIconInput(id: "txtFoto", type: "text", icon: "fa fa-id-card", required: true,
+                                placeHolder: "Foto de perfil", columnDataName: "FotoPerfil")
+                            </div>
+                            <div class=" align-content-center w-75 m-auto" style="margin-bottom: 20px">
+                                @Html.CtrlButton(viewName: "vModificarHotel", id: "btnFotoImg", type: "button", label: "Subir Foto de perfil", onClickFunction: "uploadButtonFoto", buttonType: "primary btn-sm form-control")
+                            </div>
+
+                            <div class="col-lg-12 text-center border-top border-bottom mt-3">
+                                <img style="height: 300px; width: 300px ;margin-bottom: 20px;"
+                                     id="mngFoto" src="https://res.cloudinary.com/datatek/image/upload/abkv6zreiqglxvd97l6s">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div hidden>
+                                @Html.CtrlIconInput(id: "txtLogo", type: "text", icon: "fa fa-id-card", required: true,
+                                placeHolder: "Logo", columnDataName: "Logo")
+                            </div>
+                            <div class="align-content-center w-75 m-auto" style="margin-bottom: 20px;">
+                                @Html.CtrlButton(viewName: "vModificarHotel", id: "btnLogoImg", type: "button", label: "Subir Logo", onClickFunction: "uploadButtonLogo", buttonType: "primary btn-sm form-control")
+                            </div>
+
+                            <div class="col-lg-12 text-center border-top border-bottom mt-3">
+                                <img style="height: 300px; width: 300px; margin-bottom: 20px;"
+                                     id="mngLogo" src="https://res.cloudinary.com/datatek/image/upload/lsbqx3ytg84ugkiesija">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row mb-lg-4" hidden>
+                        <div class="col-md-4">
+                            <fieldset disabled />
+                            @Html.CtrlIconInput(id: "txtIdGerente", type: "text", icon: "fa fa-user", required: true,
+                                    placeHolder:"Identificación", columnDataName: "IdGerente")
+
+                            <input type="text" id="txtHotel" class="d-none">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        @Html.CtrlButton(viewName: "vModificarHotel", id: "btnModiricar", type: "button", label: "Modificar", onClickFunction: "ValidarInputs", buttonType: "success")
+        @Html.CtrlButton(viewName: "vModificarHotel", id: "btnCancelar", type: "button", label: "Cancelar", onClickFunction: "volverPerfil", buttonType: "danger")
+        @Html.CtrlButton(viewName: "vModificarHotel", id: "btnIrServicios", type: "button", label: "Ir a mantenimiento de servicios", onClickFunction: "VerServicios", buttonType: "primary")
+
+
+    </div><!-- end form-content -->
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+         var vmodificarhotel = new vModificarHotel();
+    document.getElementById("txtHotel").value = "@ViewBag.IdHotel";
+
+        vmodificarhotel.ObtenerHotel();
+
+    });
+    //Func del script de location pick en el mapa
+    $('#Gmap').locationpicker({
+        radius: 0,
+        location: {
+            latitude: 9.932320354286343,
+            longitude: -84.03103585304564
+        },
+
+        //Este script guarda las cordenadas del marker , para guardarlas en una base de datos
+        enableAutocComplete: true,
+        inputBinding: {
+
+            latitudeInput: $('#txtLatitud'),
+            longitudeInput: $('#txtLongitud')
+
+        },
+
+        markerIcon: '/Content/images/iconMarker.png',
+        markerDraggable: true,
+        markerVisible: true
+
+    });
+</script>
+
+

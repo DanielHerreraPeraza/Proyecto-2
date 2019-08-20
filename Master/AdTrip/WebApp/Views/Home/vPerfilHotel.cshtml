@@ -1,0 +1,416 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vPerfilHotel.js"></script>
+<script type="text/javascript" src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAofdaW7YU94ABs41661bBEA59VRnl0QIE'></script>
+<script src="~/Scripts/locationpicker.jquery.js"></script>
+<script src="~/Scripts/Views/perfil-hotel-custom-date-picker.js"></script>
+<script src="~/Scripts/Views/perfil-hotel-custom-slick.js"></script>
+<script src="~/Scripts/Views/vListadoHabitaciones.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="~/Scripts/Views/vReserva.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+
+    <!--================= PAGE-COVER ================-->
+    <section class="page-cover" id="cover-hotel-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="col-lg-10 text-center border-light mt-3">
+                        <img style="height: 300px; width: 300px ;"
+                             id="P_mngFoto" src="https://res.cloudinary.com/datatek/image/upload/abkv6zreiqglxvd97l6s">
+                    </div>
+                </div><!-- end columns -->
+                <div class="col-md-5">
+                    <h1 class="page-title" id="P_NombreHotel">Nombre hotel</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a id="GoHome" href="#">Home</a></li><!--link del listar hoteles -->
+                        <li class="breadcrumb-item">Perfil de hotel</li>
+                    </ul>
+                    <h5 class="page-item" id="P_CedulaJ" style="margin-top: 10px"><span><i class="fa fa-check"></i></span> Cedula jurídica: </h5>
+
+                    <h5 class="page-item" id="P_Cadena"><span><i class="fa fa-check-circle"></i></span> Cadena:  </h5>
+                    <h5 class="page-item" id="P_Correo"><span><i class="fa fa-envelope"></i></span> Correo electrónico:  </h5>
+                    <h5 class="page-item" id="P_Telefonos"><span><i class="fa fa-phone"></i></span> Teléfonos:  </h5>
+                    <h5 class="page-item" id="P_sitio"><span><i class="fa fa-linkedin-square"></i></span> Sitio web:  </h5>
+                    <h5 class="page-item" id="P_Clasificacion">
+                        <li class="list-inline-item rating" id="P_lista_Clasificacion">
+                            <span><i class="fa fa-star"></i></span> Clasificación <i></i>nternacional:
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star lightgrey"></i></span>
+                        </li>
+                    </h5>
+                    <h5 class="page-item" id="P_Votos">
+                        <li class="list-inline-item rating" id="P_lista_votos">
+                            <span><i class="fa fa-star"></i></span> Voto de usuarios:
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star orange"></i></span>
+                            <span><i class="fa fa-star lightgrey"></i></span>
+                        </li>
+                    </h5>
+                    <h5 style="max-width: 400px" class="page-item" id="P_Descripcion"><span><i class="fa fa-pencil"></i></span> Descripción: </h5>
+
+                </div><!-- end columns -->
+                <div class="col-md-3 mt-5" id="BotonesH">
+
+                    <div class="col-lg-10 mb-1">
+
+                        @Html.CtrlButton(viewName: "vPerfilHotel", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "IrModificarH", buttonType: "info")
+                    </div>
+                    <div class="col-lg-10 mb-1">
+
+                        @Html.CtrlButton(viewName: "vPerfilHotel", id: "btnParametrizables", type: "button", label: "Detalles", onClickFunction: "IrParametrizablesH", buttonType: "info")
+                    </div>
+                    <div class="col-lg-10 mb-1">
+
+                        @Html.CtrlButton(viewName: "vPerfilHotel", id: "btnBitacora", type: "button", label: "Bitácora", onClickFunction: "IrBitacoraH", buttonType: "info")
+                    </div>
+                    <div class="col-lg-10 mb-2">
+                        <h5 class="text-center">Estado Actual:</h5>
+                        @Html.CtrlButton(viewName: "vPerfilHotel", id: "btnCambioEstado", type: "button", label: "Estado", onClickFunction: "CambioEstado", buttonType: "estadoCustom")
+                    </div>
+                    <style>
+                        #BotonesH .btn-info {
+                            background-color: #00CCCC;
+                        }
+
+                        #BotonesH .btn {
+                            width: 100%;
+                            margin: 0;
+                        }
+                    </style>
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end page-cover -->
+    <!--===== INNERPAGE-WRAPPER ====-->
+    <section class="innerpage-wrapper">
+        <div id="hotel-details" class="innerpage-section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <!--===== CAJA DE LA IZQUIERDA/ RESERVA Y PROMO====-->
+                    <div class="col-12 col-md-12 col-lg-3 side-bar left-side-bar">
+
+                        <div class="side-bar-block booking-form-block">
+
+                            <div id="formReserva" class="booking-form" style="padding-bottom: 210px;">
+                                <h3>Reservación</h3>
+                                <p>Ingrese los datos para realizar su reserva</p>
+
+                                <form id="frmReserva" name="frmReserva">
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control dpd1 fechas" placeholder="Fecha de inicio" id="txtFechaInicio" name="txtFechaInicio" ColumnDataName="FechaInicio" /><i class="fa fa-calendar"></i>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control dpd2 fechas" placeholder="Fecha de finalización" id="txtFechaFin" name="txtFechaFin" ColumnDataName="FechaFin" /><i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input id="cantDias" value="0" style="display:none;" />
+                                    <div style="margin-bottom: 4%;" >
+                                        <table id="tblTiposHab"></table>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Cantidad de personas :</label>
+                                        <input type="text" class="form-control" placeholder="Cantidad de huéspedes" min="0" id="txtHuespedes" name="txtHuespedes" ColumnDataName="CantPersonas" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Precio total de reserva</label>
+                                        <input type="text" class="form-control" placeholder="Precio reserva" min="0" id="txtPrecio" name="txtPrecio" ColumnDataName="Precio" />
+                                    </div>
+
+                                </form>
+                                <a href="#add-card" data-toggle="modal">
+                                    @Html.CtrlButton(viewName: "vReserva", id: "btnReservar", type: "button", label: "Realizar reserva", onClickFunction: "ValidarInputs", buttonType: "color")
+                                </a>
+
+
+
+                                <div class="col-md-12 text-center" id="result_msg"></div>
+
+
+                            </div><!-- end booking-form -->
+
+                            <div id="IrInicio" class="booking-form" style="padding-bottom: 60px;">
+                                <h3>Reservación</h3>
+                                <p style="margin: 30% 0%; font-size: 30px;">Para poder realizar la reserva a este hotel, debe iniciar sesión</p>
+
+                                @Html.CtrlButton(viewName: "vReserva", id: "btnIrInicio", type: "button", label: "Iniciar sesión", onClickFunction: "IrInicioSesion", buttonType: "color")
+
+                            </div><!-- end booking-form -->
+
+                        </div><!-- end side-bar-block -->
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-12">
+                                <div class="side-bar-block main-block ad-block">
+                                    <div class="main-img ad-img">
+                                        <a href="#">
+                                            <img src="~/Content/images/Promocion_logo.png" class="img-responsive" alt="car-ad" />
+                                            <div class="ad-mask">
+                                                <div class="ad-text">
+                                                    <span>Mira</span>
+                                                    <h2>Las</h2>
+                                                    <span>Promos</span>
+                                                </div><!-- end ad-text -->
+                                            </div><!-- end columns -->
+                                        </a>
+                                    </div><!-- end ad-img -->
+                                </div><!-- end side-bar-block -->
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-6 col-lg-12">
+                                <div class="side-bar-block support-block">
+                                    <h3>¿Necesitas ayuda?</h3>
+                                    <p>No dude en contactar a nuestras operadoras, están disponibles las 24 horas para atender a nuestros clientes.</p>
+                                    <div class="support-contact">
+                                        <span><i class="fa fa-phone"></i></span>
+                                        <p>+506 62057814</p>
+                                    </div><!-- end support-contact -->
+                                </div><!-- end side-bar-block -->
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end columns -->
+                    <!--=====FIN__________ CAJA DE LA IZQUIERDA/ RESERVA Y PROMO====-->
+                    <!--=====CAJA DE LA DERECHA/ GALERIAS Y CAJAS DE SERVICIOS,HABITACIONES Y DEMAS====-->
+                    <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side  ">
+
+                        <div class="row mb-lg-4" style="background-color:#231f20;
+padding-top: 30px; padding-bottom: 30px; padding-left: 20px;
+border-radius: 20px; color: white">
+                            <div class="col-lg-12">
+                                <h2 class="page-item" style="text-align: center">¿Cómo encontrarnos?</h2>
+                            </div>
+                            <div class="col-lg-5" style="color: #828282; margin-top: 5px;">
+                                <h3 class="page-item">Ubicación:</h3>
+                                <h4 class="page-item" id="P_Provincia">Provincia: </h4>
+                                <h4 class="page-item" id="P_Canton">Cantón: </h4>
+                                <h4 class="page-item" id="P_Distrito">Distrito: </h4>
+                                <h4 class="page-item" id="P_Direccion">Dirección: </h4>
+
+                            </div>
+                            <div class="col-lg-6" style=" border: 5px white">
+                                <!-- mapa -->
+                                <div id="Gmap" style="height: 300px; width: 100%;"> </div>
+                            </div>
+                            <div class="col-lg-1">
+
+                            </div>
+
+                            <div class="d-none">
+                                <fieldset disabled/>
+                                    @Html.CtrlIconInput(id: "txtLatitud", type: "text", icon: "fa fa-map-marker", required: true,
+                                    placeHolder: "Latitud", columnDataName: "UbicacionX")
+                                    @Html.CtrlIconInput(id: "txtLongitud", type: "text", icon: "fa fa-map-marker", required: true,
+                                    placeHolder: "Longitud", columnDataName: "UbicacionY")
+                                    <input type="text" id="txtIdHotel" class="d-none">
+                            </div>
+                        </div>
+
+                        <!--=====cOSAS DEL HOTEL, ====-->
+
+                        <div class="detail-tabs">
+                            <ul class="nav nav-tabs nav-justified ">
+                                <li class="nav-item"><a class="nav-link active" href="#hotel-overview" data-toggle="tab">Habitaciones</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#restaurant" data-toggle="tab">Servicios</a></li>
+                                @*<li class="nav-item"><a class="nav-link" href="#pick-up" data-toggle="tab">Pick Up Services</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#luxury-gym" data-toggle="tab">Luxury Gym</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#sports-club" data-toggle="tab">Sports Club</a></li>*@
+                            </ul>
+
+                            <div class="tab-content">
+
+                                <div id="hotel-overview" class="tab-pane in active">
+
+                                    <div style="margin-top: 20px;" id="listarHoteles" class="d-inline">
+                                        @Html.CtrlTable(viewName: "vListadoHabitaciones", id: "tblTipoHabitaciones", title: "Habitaciones",
+                                        columnsTitle: "Habitaciones",
+                                        ColumnsDataName: "Codigo,Nombre,NumCamas,CupoMax,Precio,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                    </div>
+
+                                </div><!-- end hotel-overview -->
+
+                                <div id="restaurant" class="tab-pane">
+                                    <div class="row">
+                                        <div id="CardHotel" style="width:100%">
+                                            <div style="margin-top: 20px;" id="listarServicios" class="d-inline">
+                                                <div class="container mb-6">
+                                                    <div class="card-header">Servicios disponibles</div>
+                                                    <div class="card-body">
+                                                        <table id="tblServicios" class="display table table-striped table-bordered h" cellspacing="0" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Servicios</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="available-blocks"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div><!-- Card del hotel -->
+
+
+
+
+                                    </div><!-- end row -->
+                                </div><!-- end luxury-gym -->
+
+
+                            </div><!-- end available-tours -->
+
+
+                        </div><!-- end columns -->
+
+                        <div id="edit-profile" class="modal custom-modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h3 class="modal-title">Fotos de la habitación</h3>
+                                    </div><!-- end modal-header -->
+
+                                    <form class="" id="frmEdition" method="get" action="">
+                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-12 content-side">
+
+
+                                            <div class="row" id="galeriaTipoHabitaciones">
+
+                                            </div><!-- end row -->
+
+                                            <div class="detail-tabs">
+                                                <ul class="nav nav-tabs nav-justified">
+                                                    <li class="active"><a href="#hotel-overview" data-toggle="tab">Información</a></li>
+
+                                                </ul>
+
+                                                <div class="tab-content">
+
+                                                    <div id="hotel-overview" class="tab-pane in active">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6 tab-text">
+                                                                <h4>Descripción</h4>
+                                                                <p id="Pp_Descripcion"> <span id="P_Descripcion"></span></p>
+                                                            </div><!-- end columns -->
+                                                            <div class="col-sm-6 col-md-6 tab-text">
+                                                                <h4>Detalles</h4>
+                                                                <h5 class="page-item" id="P_NumCamas"><span><!--<i class="fa fa-id-card"></i>--></span> </h5>
+                                                                <h5 class="page-item" id="P_CupoMax"><span><!--<i class="fa fa-id-card"></i>--></span>  </h5>
+                                                                <h5 class="page-item" id="P_Precio"><span><!--<i class="fa+ fa-id-card"></i>--></span> </h5>
+
+                                                            </div><!-- end columns -->
+
+
+                                                        </div><!-- end row -->
+                                                    </div><!-- end hotel-overview -->
+
+
+
+                                                </div><!-- end tab-content -->
+                                            </div><!-- end detail-tabs -->
+
+
+                                        </div><!-- end columns -->
+                                    </form>
+
+
+
+
+                                </div><!-- end modal-bpdy -->
+                            </div><!-- end modal-content -->
+
+                        </div><!-- end edit-profile -->
+
+                    </div><!-- end row -->
+                </div><!-- end container -->
+            </div><!-- end hotel-details -->
+    </section><!-- end innerpage-wrapper -->
+</div>
+
+
+<div id="add-card" class="modal custom-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div><!-- end modal-header -->
+
+            <div class="modal-body">
+                <form>
+
+
+                    <h2 class="modal-title">Pago por Paypal</h2>
+
+                    <p>El costo de la reserva es de: <span id="precioTotal"></span> </p>
+
+                    <h4>Para realizar el pago de la reserva, dele click al siguiente botón</h4>
+
+
+                    <div class="mt-4" id="paypal-button"></div>
+                </form>
+            </div><!-- end modal-bpdy -->
+        </div><!-- end modal-content -->
+    </div><!-- end modal-dialog -->
+</div><!-- end add-card -->
+
+
+
+<script>
+
+    $(document).ready(function () {
+        var vperfilhotel = new vPerfilHotel();
+        document.getElementById("txtIdHotel").value = "@ViewBag.IdHotel";
+
+    vperfilhotel.ObtenerHotel();
+
+    });
+
+    //Func del script de location pick en el mapa
+    $('#Gmap').locationpicker({
+        radius: 0,
+        location: {
+            latitude: 9.932320354286343,
+            longitude: -84.03103585304564
+        },
+
+        //Este script guarda las cordenadas del marker , para guardarlas en una base de datos
+        enableAutocComplete: true,
+        inputBinding: {
+
+            latitudeInput: $('#txtLatitud'),
+            longitudeInput: $('#txtLongitud')
+
+        },
+
+        markerIcon: '/Content/images/iconMarker.png',
+        markerDraggable: false,
+        markerVisible: true
+
+    });
+
+
+</script>
+<style>
+    .modal-content {
+        width: 850px;
+        align-content: center;
+    }
+
+    .custom-modal .modal-dialog {
+        width: auto;
+    }
+</style>

@@ -1,0 +1,30 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vCambiarContrasenna.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<div class="dashboard-heading d-flex justify-content-center">
+    <h2>Cambiar <span>Contraseña</span></h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="custom-form custom-form-fields text-center col-lg-6">
+        <h3>Formulario</h3>
+        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
+        <form id="frmEdition" method="get" action="">
+            @Html.CtrlInput(id: "txtContrasennaActual", type: "password", label: "Contraseña actual",
+            placeHolder: "", columnDataName: "Contrasenna")
+
+            @Html.CtrlInput(id: "txtContrasennaNueva", type: "password", label:"Nueva contraseña",
+            placeHolder: "", columnDataName: "ContrasennaNueva")
+
+            @Html.CtrlInput(id: "txtConfirmacionContrasenna", type: "password", label:"Confirmar contraseña",
+            placeHolder: "", columnDataName: "ConfirmacionContrasenna")
+
+            @Html.CtrlButton(viewName: "vModificarContrasenna", id: "btnModificarContrasenna", type: "button",
+                label: "MODIFICAR", onClickFunction: "ValidarInputs", buttonType: "color")
+        </form>
+    </div><!-- end custom-form -->
+</div><!-- end form-content -->

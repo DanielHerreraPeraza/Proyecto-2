@@ -1,0 +1,70 @@
+﻿<script src="~/Scripts/Views/vDashboardHotel.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Dashboard de <span id="NomHotel"></span></h2>
+
+<div id="dashboard-tabs">
+    <div class="tab-content">
+        <div id="dsh-dashboard" class="tab-pane in active">
+            <div class="dashboard-content">
+                <h2 class="dash-content-title">Ganancias</h2>
+                <div class="row info-stat">
+                    <div style="margin-left:40%" class="col-md-6 col-lg-3">
+                        <div class="stat-block">
+                            <span><i class="fa fa-money"></i></span>
+                            <h3 id="totalGanancias"></h3>
+                            <p>Ganancias totales</p>
+                        </div><!-- end stat-block -->
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+
+
+            </div><!-- end dashboard-content -->
+        </div><!-- end dsh-dashboard -->
+
+
+    </div><!-- end tab-content -->
+</div>
+
+
+
+
+
+<div style="margin: 50px; margin-bottom:100px;">
+
+    <h2>Reportes de las ganancias</h2>
+    <div>
+        <div style="margin-top: 70px; margin-bottom:50px; height: 50vh; width:70vw;">
+            @Html.CtrlGraficoBarras(viewName: "vDashboardHotel", id: "chartGananciasXMes", title: "Ganancias por mes",
+         chartType: "bar", onLoadFunction: "GetReporteGraficoXMes", onInitializeChart: "ChartReporteXMes")
+        </div>
+    </div>
+
+    <div style="margin-top: 70px;" id="listaGananciasXDia" class="d-inline">
+        @Html.CtrlTable(viewName: "vDashboardHotel", id: "tblGananciasXMes", title: "Historial de ganancias por mes",
+    columnsTitle: "Fecha, Dinero recibido", ColumnsDataName: "FechaRealizado,MontoGanancia", onSelectFunction: "", colorHeader:"")
+    </div>
+
+
+
+    <h2>Reportes de habitaciones</h2>
+    <div>
+        <div style="display:flex;">
+            <div class="graficoDonut" style="width: 1000px;float: left;">
+                @Html.CtrlGraficoDoughnut(viewName: "vDashboardHotel", id: "chartReporteCantHabTipo", title: "Cantidad de habitaciones por tipo",
+         chartType: "doughnut", onLoadFunction: "GetReporteCantHabitacionTipo", onInitializeChart: "ChartReporteCantHabTipo", onChange:"CambiarForma")
+            </div>
+            <div style="width: 1000px;float: right;">
+                @Html.CtrlGraficoPie(viewName: "vDashboardHotel", id: "chartDisponHabitaciones", title: "Disponibilidad de habitaciones",
+             chartType: "pie", onLoadFunction: "GetReporteGraficoDisponibilidad", onInitializeChart: "ChartReporteDisponibilidad")
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

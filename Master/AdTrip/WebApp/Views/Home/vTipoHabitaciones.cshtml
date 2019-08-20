@@ -1,0 +1,309 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vTipoHabitaciones.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Seccion <span>Tipos de habitaciones</span></h2>
+                       
+                        <p> En esta vista puede dar mantenimiento a todos los tipos de habitaciones del hotel</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarTipoHabitaciones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaTipoHabitaciones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaTipoHabitaciones" class="d-inline">
+                                    @* @Html.CtrlTable(viewName: "vTipoHabitaciones", id: "tblTipoHabitaciones", title: "Tipo de Habitaciones",
+                                        columnsTitle: "Código,Nombre,Descripción,Numero de Camas,Cupo Máximo,Precio,Estado,Hora de CheckIn,Hora de ChekOut", ColumnsDataName: "Codigo,Nombre,Descripcion,NumCamas,CupoMax,Precio,Estado,HoraCheckIn,HoraChekOut", onSelectFunction: "BindFields", colorHeader:"red")*@
+                                    @Html.CtrlTable(viewName: "vTipoHabitaciones", id: "tblTipoHabitaciones", title: "Tipo de Habitaciones",
+        columnsTitle: "Nombre,Número de Camas,Cupo Máximo,Precio,Estado", ColumnsDataName: "Nombre,NumCamas,CupoMax,Precio,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="crearTipoHabitaciones" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate" method="get" action="">
+
+                                            <div class="col-sm-12 text-center">
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtCodigo", type: "text", icon: "fa fa-id-card", required: true,
+                                                                placeHolder: "Código", columnDataName: "Codigo")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtNombre", type: "text", icon: "fa fa-id-card", required: true,
+                                                                placeHolder: "Nombre", columnDataName: "Nombre")
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtNumCamas", type: "number", icon: "fa fa-hotel", required: true,
+                                                                placeHolder:"Número de camas", columnDataName: "NumCamas")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtCupoMax", type: "number", icon: "fa fa-hotel", required: true,
+                                                                placeHolder:"Cupo máximo", columnDataName: "CupoMax")
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtPrecio", type: "number", icon: "fa fa-money", required: true,
+                                                                placeHolder:"Precio", columnDataName: "Precio")
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlIconInput(id: "txtNumHabitaciones", type: "number", icon: "fa fa-hotel", required: true,
+                                                                placeHolder: "Número de habitaciones", columnDataName: "NumHabitaciones")
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+
+                                                        @Html.CtrlInput(id: "txtHoraCheckIn", type: "time", label: "Hora de Check In",
+                                                                       placeHolder: "Hora de Check In", columnDataName: "HoraCheckIn")
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlInput(id: "txtHoraCheckOut", type: "time", label: "Hora de Check Out",
+                                                                       placeHolder: "Hora de Check Out", columnDataName: "HoraCheckOut")
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlTextArea(id: "txtDescripcion", type: "text", label: "Descripción", columnDataName: "Descripcion")
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="form-row" style="margin: 20px auto;">
+                                                    <div style="margin: 80px auto;">
+                                                        <img style="margin-right: 20px; min-width:200px; max-width:200px; max-height:150px; min-height:150px;" id="fotoPrincipalTipoHabitacion" src="https://res.cloudinary.com/datatek/image/upload/v1563342080/dt5bmjkszyklaibagwxi.jpg" />
+                                                        @Html.CtrlButton(viewName: "vTipoHabitaciones", type: "button", id: "btnFotoPrincipalTipoHabitacion", label: "Agregar foto principal", onClickFunction: "AgregarFotoPrincipal", buttonType: "info")
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <h3>Fotos de la habitación</h3>
+                                                    <div class="card-body">
+                                                        <a class="d-none" href="#" id="upload_widget_opener">Upload multiple images</a>
+                                                        @Html.CtrlButton(viewName: "vTipoHabitaciones", type: "button", id: "btnFotoTipoHabitaciones", label: "Agregar foto", onClickFunction: "AgregarFoto", buttonType: "info")
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <table class="table" id="tabla_fotos_tipo_habitaciones">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Imágenes</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="imagenesTipoHabitaciones"></tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vTipoHabitaciones", id: "btnCreate", type: "button", label: "Registrar", onClickFunction: "ValidarInputsCrear", buttonType: "color")
+                                            </div>
+                                        </form>
+
+
+                                      
+
+                                    </div>
+                                </div><!-- end form-content -->
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarTipoHabitaciones" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition" method="get" action="">
+
+                                            <div class="col-lg-12 text-center">
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        <fieldset disabled>
+                                                            @Html.CtrlInput(id: "txtCodigo", type: "text", label: "Código",
+                                                                         placeHolder: "Código", columnDataName: "Codigo")
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlInput(id: "txtNombre", type: "text", label: "Nombre",
+                                                                       placeHolder: "Nombre", columnDataName: "Nombre")
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlInput(id: "txtNumCamas", type: "number", label: "Número de camas",
+                                                                placeHolder: "Número de camas", columnDataName: "NumCamas")
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlInput(id: "txtCupoMax", type: "number", label: "Cupo Maximo",
+                                                           placeHolder: "Cupo Máximos", columnDataName: "CupoMax")
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlInput(id: "txtPrecio", type: "number", label: "Precio",
+                                                          placeHolder: "Precio", columnDataName: "Precio")
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        @*@Html.CtrlInput(id: "txtEstado", type: "text", label: "Estado",
+                    placeHolder: "Estado", columnDataName: "Estado")*@
+                                                        @Html.CtrlDropDown(id: "txtUEstado", label: "Estado", listId: "LST_ESTADO_HABITACIONES", columnDataName: "ValorEstado")
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-6">
+                                                        @Html.CtrlTextArea(id: "txtDescripcion", type: "text", label: "Descripción", columnDataName: "Descripcion")
+
+                                                    </div>
+                                                    <div class="col-lg-6 d-none">
+                                                        @Html.CtrlInput(id: "txtHoraChekIn", type: "datetime", label: "Hora de check in",
+                                                    placeHolder: "Hora de check in", columnDataName: "HoraCheckIn")
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6 d-none">
+                                                        @Html.CtrlInput(id: "txtHoraChekOut", type: "datetime", label: "Hora de check out",
+                                                placeHolder: "Hora de check out", columnDataName: "HoraCheckOut")
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row" style="margin: 20px auto;">
+                                                <div style="margin: 5% 35%;" class="gallery-block">
+                                                    <h4 style="padding-bottom:8%">Foto de perfil actual</h4>
+                                                    <div class="gallery-img" style="">
+                                                        <img style="width:100%" id="modFotoServicio" src="https://res.cloudinary.com/datatek/image/upload/v1563342080/dt5bmjkszyklaibagwxi.jpg" />
+                                                        <div class="gallery-mask" style="height:30%; top:0; right:0; transition:none;">
+                                                            <button type="button" id="btnModFotoPS" onclick="ModFotoPerfil()" title="Modificar foto de perfil" class="image-link" style="transform:none; top:0%; right:10px; margin-top:2%; background-color:transparent; border:none;">
+                                                                <span>
+                                                                    <i class="fa fa-edit"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div><!-- end gallery-img -->
+                                                </div>
+                                            </div>
+
+                                            <div>
+
+
+                                                <div class="mfp-zoom-out-cur">
+                                                    <div id="gallery-page" style="margin-bottom:0;" class="innerpage-section-padding galeria-fotos">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                                                    <div class="page-heading vServicio">
+                                                                        <h3>Fotos del servicio</h3>
+                                                                        <hr class="heading-line" />
+                                                                    </div><!-- end page-heading -->
+
+
+                                                                </div><!-- end columns -->
+                                                            </div><!-- end row -->
+                                                        </div><!-- end container -->
+                                                    </div><!-- end gallery-page -->
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <table class="table" id="tabla_fotos_servicio">
+                                                    <thead>
+                                                        <tr></tr>
+                                                    </thead>
+                                                    <tbody id="modImgsServicio"></tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-body">
+                                                <a href="#" id="upload_widget_opener" style="display: none;">Pulse aquí</a>
+                                                @Html.CtrlButton(viewName: "vTipoHabitaciones", type: "button", id: "btImgServicio", label: "Agregar nueva foto", onClickFunction: "AgregarNuevaFoto", buttonType: "info")
+                                            </div>
+
+
+                                            <div class="row" id="galeriaServicios">
+
+                                            </div><!-- end row -->
+
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vTipoHabitaciones", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "ValidarInputsModificar", buttonType: "info")
+                                                @* @Html.CtrlButton(viewName: "vTipoHabitaciones", id: "btnEliminar", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")*@
+                                            </div>
+
+                                        </form>
+                                      
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+                            </div>
+
+                        </div><!-- end columns -->
+
+                    </div><!-- end row -->
+                </div><!-- end dashboard-wrapper -->
+            </div><!-- end columns -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+
+
+
+</section><!-- end innerpage-wrapper -->

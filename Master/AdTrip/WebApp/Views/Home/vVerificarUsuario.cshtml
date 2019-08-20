@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+
+    $(document).ready(function () {
+        var ctrlActions = new ControlActions();
+
+        ctrlActions.GetById("https://adtripapp.azurewebsites.net/api/seguridad/ConfirmarUsuario/" + "@ViewBag.IdUsuario", function () { } )
+
+
+    });
+
+</script>

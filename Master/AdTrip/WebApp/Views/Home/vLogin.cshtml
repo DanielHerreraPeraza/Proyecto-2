@@ -1,0 +1,47 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vLogin.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<div class="dashboard-heading d-flex justify-content-center">
+    <h2>Inicio <span>Sesión</span></h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="custom-form custom-form-fields text-center col-lg-6">
+        <p>Ingrese los datos que se le solicitan a continuación.</p>
+        <form id="frmEdition" method="get" action="">
+            @Html.CtrlInput(id: "txtCorreo", type: "text", label:"Correo",
+            placeHolder: "Correo electrónico", columnDataName: "Correo")
+
+            @Html.CtrlInput(id: "txtContrasenna", type: "password", label: "Contraseña",
+            placeHolder: "Contraseña", columnDataName: "Contrasenna")
+
+            @*<div class="checkbox">
+                <label><input type="checkbox"> Recordarme </label>
+                </div>*@
+
+            @Html.CtrlButton(viewName: "vLogin", id: "btnLogIn", type: "button", label: "LOGIN", onClickFunction: "ValidarInputs", buttonType: "color")
+        </form>
+
+        <div class="other-links">
+            <p class="link-line">¿Aún no tiene una cuenta? <a href="/Home/vRegistroUsuarios">Registrarse</a></p>
+            <a class="simple-link" href="/home/vRestablecerContrasenna">¿Olvidó la contraseña?</a>
+        </div><!-- end other-links -->
+        <div id="my-signin2" class="g-signin2 row justify-content-center pt-4" data-onsuccess="onSignIn"></div>
+
+    </div><!-- end custom-form -->
+</div><!-- end form-content -->
+<input type="text" id="txtIdSolicitud" class="d-none">
+<input type="text" id="txtCorreoSoli" class="d-none">
+<script>
+    $(document).ready(function () {
+        var vlogin = new vLogin();
+        document.getElementById("txtIdSolicitud").value = "@ViewBag.IdSolicitud";
+
+        vlogin.ObtenerSolicitud();
+
+    });
+</script>

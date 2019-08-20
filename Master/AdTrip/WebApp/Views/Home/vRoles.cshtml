@@ -1,0 +1,151 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vRoles.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Sección <span>Roles</span></h2>
+                      
+                        <p>Esta vista permite dar mantenimiento a los roles.</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarRoles">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaRoles">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaRoles" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vRoles", id: "tblRoles", title: "Lista de roles",
+                                    columnsTitle: "Código,Nombre,Descripción,Estado", ColumnsDataName: "Codigo,Nombre,Descripcion,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="crearRoles" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate" method="get" action="">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtCodigo", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Código", columnDataName: "Codigo")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtNombre", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Nombre", columnDataName: "Nombre")
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-lg-12">
+                                                            @Html.CtrlIconInput(id: "txtDescripcion", type: "text", icon: "fa fa-user", required: true,
+                                                                    placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div id="divVistas" class="col-lg-6">
+                                                            @Html.CtrlMultipleSelect(id: "txtVistas", label: "Vistas", listId: "LST_VISTA", columnDataName: "Vistas")
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div id="divHoteles" class="col-lg-6">
+                                                            @Html.CtrlMultipleSelect(id: "txtHoteles", label: "Hoteles", listId: "LST_HOTEL", columnDataName: "Hoteles")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vRoles", id: "btnRegistrar", type: "button", label: "Registrar", onClickFunction: "ValidarInputsCrear", buttonType: "color")
+                                            </div>
+                                        </form>                                        
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarRoles" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition" method="get" action="">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtUCodigo", type: "text", label: "Código",
+                                                                            placeHolder: "Código", columnDataName: "Codigo")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtUNombre", type: "text", label: "Nombre",
+                                                                        placeHolder: "Nombre", columnDataName: "Nombre")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtUDescripcion", type: "text", label: "Descripción",
+                                                                        placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlDropDown(id: "txtUEstado", label: "Estado", listId: "LST_ESTADO_ROLES", columnDataName: "ValorEstado")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="align-content-center">
+                                                @Html.CtrlButton(viewName: "vRoles", id: "btnModificar", type: "submit", label: "Modificar", onClickFunction: "ValidarInputsModificar", buttonType: "info")
+                                               @* @Html.CtrlButton(viewName: "vRoles", id: "btnEliminar", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")*@
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

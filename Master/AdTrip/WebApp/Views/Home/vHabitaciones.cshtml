@@ -1,0 +1,162 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vHabitaciones.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Seccion <span>Habitaciones</span></h2>
+                        <p>En esta sección se puede dar mantenimiento a las habitaciones del hotel</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarHabitaciones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaHabitaciones">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaHabitaciones" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vHabitaciones", id: "tblHabitaciones", title: "Habitaciones",
+    columnsTitle: "Número de habitación,Estado,Tipo de Habitación", ColumnsDataName: "Codigo,Estado,NombreTipoHab", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--<button class="btn" data-toggle="modal" data-target="#edit-profile">Funcionalidades</button>-->
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="crearHabitaciones" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate">
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+
+                                                    <div class="form-row mb-lg-4">
+                                                        <div class="col-lg-6">
+                                                            <div style="margin-bottom: 4%;">
+                                                                <table id="tblTiposHab"></table>
+                                                            </div>
+                                                            @* @Html.CtrlDropDown(id: "txtIdTipoHab", label: "Tipo de habitación", listId: "LST_TIPO_HABITACIONES", columnDataName: "IdTipoHab")*@
+                                                        </div>
+                                                    </div>
+
+
+                                                    @*<div class="form-row">
+                                <legend class="col-form-label col-sm-2 pt-0">Estado</legend>
+                                <div class="radio">
+                                    <label class="radio-inline"><input type="radio" value="1" name="optradio" ColumnDataName="Estado">Habilitado</label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio-inline"><input type="radio" value="2" name="optradio" ColumnDataName="Estado">Deshabilitado</label>
+                                </div>
+                            </div>*@
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vHabitaciones", id: "btnCreate", type: "button", label: "Registrar", onClickFunction: "Create", buttonType: "color")
+                                        </div>
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarHabitaciones" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtCodigo", type: "text", label: "Código",
+                                                                            placeHolder: "Código", columnDataName: "Codigo")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-lg-6">
+
+                                                                @Html.CtrlDropDown(id: "txtEstado", label: "Estado", listId: "LST_ESTADO_HABITACIONES", columnDataName: "ValorEstado")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlInput(id: "txtIdTipoHab", type: "text", label: "Id de tipo de habitación",
+                                                                            placeHolder:"ID", columnDataName: "IdTipoHab")
+                                                                </fieldset>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled>
+                                                                    @Html.CtrlDropDown(id: "txtIdTipoHab", label: "Tipo de habitación", listId: "LST_TIPO_HABITACIONES", columnDataName: "IdTipoHab")
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vHabitaciones", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "Update", buttonType: "info")
+                                            @Html.CtrlButton(viewName: "vHabitaciones", id: "btnEliminar", type: "button", label: "Eliminar", onClickFunction: "ValidarInputsDelete", buttonType: "danger")
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+
+
+                            </div><!-- end columns -->
+                    
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->
+
+
+<style>
+    .modal-content {
+        width: 450px;
+        align-content: center;
+    }
+
+    .custom-modal .modal-dialog {
+        width: auto;
+    }
+</style>

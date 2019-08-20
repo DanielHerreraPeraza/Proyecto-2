@@ -1,0 +1,110 @@
+﻿.servicio {
+    margin-left: 9%;
+    margin-bottom: 10%;
+}
+
+
+.galeria-fotos {
+    margin-left: 4%;
+    margin-bottom: 10%;
+    margin-top: 0%;
+    width: 100%;
+}
+
+#galeriaServicios {
+    max-width: 1000px;
+    padding-left:7%;
+}
+
+.gallery-product {
+    flex: none;
+    margin-right: 8%;
+    width: 630px;
+}
+
+.gallery-block {
+    width: 180px;
+}
+
+.gallery-img {
+    max-width: 270px;
+    min-width: 270px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+.gallery-img img{
+    max-width: 270px;
+    min-width: 270px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+
+
+
+.img-servicio {
+    width: 200px;
+    height: 200px;
+}
+
+#gallery-page .page-heading {
+    margin-bottom: 50px;
+    width: 80%;
+}
+
+
+#gallery-page .vServicio {
+    margin-bottom: 50px;
+    width: 90%;
+}
+
+
+#gallery-page {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+@media only screen and (max-width: 945px) {
+    .servicio {
+        margin-left: 0%;
+        margin-bottom: 0%;
+    }
+
+
+    .galeria-fotos {
+        margin-left: 0%;
+        margin-bottom: 10%;
+        margin-top: 0%;
+        width: 100%;
+    }
+
+    .gallery-img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .gallery-block {
+        width:120px;
+    }
+
+    #galeriaServicios {
+        padding-left: 42px;
+    }
+
+    .img-servicio {
+        width: 150px;
+        height: 150px;
+    }
+
+    .gallery-product {
+        flex: none;
+        width:230px;
+    }
+
+    #gallery-page .page-heading {
+        margin-bottom: 50px;
+        margin-left: 4%;
+    }
+
+}

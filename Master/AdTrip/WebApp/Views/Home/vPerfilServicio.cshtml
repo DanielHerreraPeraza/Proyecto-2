@@ -1,0 +1,125 @@
+﻿@using WebApp.Helpers;
+
+
+<script src="~/Scripts/Views/vPerfilServicio.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper" style="margin: 0 auto;">
+
+
+    <section class="page-cover" id="cover-tour-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-title nombreServicio"></h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item nombreServicioItem"></li>
+                    </ul>
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end page-cover -->
+    <!--===== INNERPAGE-WRAPPER ====-->
+    <section class="innerpage-wrapper">
+        <div id="tour-details" class="innerpage-section-padding servicio">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side servicio">
+
+
+                        <div class="detail-tabs">
+                            <div class="tab-content">
+
+                                <div id="tour-information" class="tab-pane in active">
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4 tab-img">
+                                            <img id="fotoServicio" src="https://res.cloudinary.com/datatek/image/upload/v1562798986/Imagenes%20default/servicios_ohqi7k.png" class="img-fluid" alt="flight-detail-img" />
+                                        </div><!-- end columns -->
+
+                                        <div class="col-md-8 col-lg-8 tab-text">
+                                            <h3>Descripción del servicio</h3>
+                                            <p id="descripcionServicio"></p>
+                                        </div><!-- end columns -->
+                                    </div><!-- end row -->
+                                </div><!-- end hotel-overview -->
+
+
+
+                            </div><!-- end tab-content -->
+                        </div><!-- end detail-tabs -->
+                    </div>
+                    <!-- end columns -->
+
+                    <div class="mfp-zoom-out-cur">
+                        <div id="gallery-page" class="innerpage-section-padding galeria-fotos">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="page-heading vServicio">
+                                            <h1>Galería de fotos</h1>
+                                            <hr class="heading-line" />
+                                        </div><!-- end page-heading -->
+
+                                        <div class="row" id="galeriaServicios">
+
+                                        </div><!-- end row -->
+
+                                    </div><!-- end columns -->
+                                </div><!-- end row -->
+                            </div><!-- end container -->
+                        </div><!-- end gallery-page -->
+                    </div>
+
+                    <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side servicio" style="margin-bottom:12%;">
+                        <div style="margin-top: 10%;" class="available-blocks">
+
+                            <div style="margin-top: 20px;" id="listarProductos" class="d-inline">
+                                <div class="container mb-6">
+                                    <div class="card-header"> 
+                                        <h2>Productos disponibles</h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <table id="tblProductos" class="display table table-striped table-bordered h" cellspacing="0" width="100%" ColumnsDataName="">
+                                            <thead>
+                                                <tr>
+                                                    <th>Productos</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="available-blocks">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end available-tours -->
+
+
+                    </div><!-- end columns -->
+
+
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end tour-detail -->
+    </section><!-- end innerpage-wrapper -->
+
+    <button type="button" onclick="VolverPefilHotel()" name="volver atrás" value="volver atrás" class="btn btn-color"> Volver atrás</button>
+
+    <!--======================= BEST FEATURES =====================-->
+    <input type="text" id="txtIdServicio" class="d-none">
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var vservi = new vPerfilServicio();
+        document.getElementById("txtIdServicio").value = "@ViewBag.IdServicio";
+
+        vservi.LlenarDatos();
+
+    });
+
+</script>

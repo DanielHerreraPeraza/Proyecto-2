@@ -1,0 +1,89 @@
+﻿<link href="~/Content/template/vDashboards.css" />
+<script src="~/Scripts/Views/vDashboardAdministrador.js"></script>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="dashboard-tabs"  style="margin-top: -25px;">
+    <div class="tab-content">
+        <div id="dsh-dashboard" class="tab-pane in active">
+            <div class="dashboard-content">
+                <h2 class="dash-content-title">Ganancias</h2>
+                <div style="margin-left: 20%" class="row info-stat">
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-block">
+                            <span><i class="fa fa-money"></i></span>
+                            <h3 id="gananciasComisiones"></h3>
+                            <p>Ganancias por comisiones</p>
+                        </div><!-- end stat-block -->
+                    </div><!-- end columns -->
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-block">
+                            <span><i class="fa fa-money"></i></span>
+                            <h3 id="gananciasMembresias"></h3>
+                            <p>Ganancias por membresías</p>
+                        </div><!-- end stat-block -->
+                    </div><!-- end columns -->
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-block">
+                            <span><i class="fa fa-money"></i></span>
+                            <h3 id="totalGanancias"></h3>
+                            <p style="margin-top:10%">Ganancias totales</p>
+                        </div><!-- end stat-block -->
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+
+
+            </div><!-- end dashboard-content -->
+        </div><!-- end dsh-dashboard -->
+
+
+    </div><!-- end tab-content -->
+</div>
+
+<div style="margin: 50px;">
+
+    <h2>Reportes de fechas</h2>
+
+
+    <div>
+        <div style="margin-top: 70px; margin-bottom:50px; height: 50vh; width:70vw;">
+            @Html.CtrlGraficoBarras(viewName: "vDashboardAdministrador", id: "chartGananciasXMes", title: "Ganancias por mes",
+         chartType: "bar", onLoadFunction: "GetReporteGraficoXMesAdmin", onInitializeChart: "ChartReporteMes")
+        </div>
+    </div>
+
+    <div style="margin-top: 70px;" id="listaGananciasXMes" class="d-inline">
+        @Html.CtrlTable(viewName: "vDashboardAdministrador", id: "tblGananciasXMes", title: "Historial de ganancias por mes",
+    columnsTitle: "Meses, Dinero recibido", ColumnsDataName: "FechaRealizado,MontoGanancia", onSelectFunction: "", colorHeader:"")
+    </div>
+    <div>
+        <div style="margin-top: 70px; margin-bottom:50px;height: 50vh; width:70vw;">
+            @Html.CtrlGraficoBarras(viewName: "vDashboardAdministrador", id: "chartGananciasComisionesXDia", title: "Ganancias de comisiones por día",
+         chartType: "line", onLoadFunction: "GetReporteGraficoComisionesXDiaAdmin", onInitializeChart: "ChartReporteComisiones")
+        </div>
+    </div>
+    <div style="margin-top: 70px;" id="listaGananciasComisiones" class="d-inline">
+        @Html.CtrlTable(viewName: "vDashboardAdministrador", id: "tblGananciasComisionesXDia", title: "Historial de ganancias de comisiones por día",
+    columnsTitle: "Fecha realizado, Dinero recibido", ColumnsDataName: "FechaRealizado,MontoGanancia", onSelectFunction: "", colorHeader:"")
+    </div>
+    <div>
+        <div style="margin-top: 70px; margin-bottom:50px;height: 50vh; width:70vw;">
+            @Html.CtrlGraficoBarras(viewName: "vDashboardAdministrador", id: "chartGananciasMembresiasXMes", title: "Ganancias de membresías por mes",
+         chartType: "bar", onLoadFunction: "GetReporteGraficoMembresiasXMesAdmin", onInitializeChart: "ChartReporteMembresias")
+        </div>
+    </div>
+    <div style="margin-top: 70px;" id="listaGananciasMembresias" class="d-inline">
+        @Html.CtrlTable(viewName: "vDashboardAdministrador", id: "tblGananciasMembresiasXMes", title: "Historial de de membresias por mes",
+    columnsTitle: "Meses, Dinero recibido", ColumnsDataName: "FechaRealizado,MontoGanancia", onSelectFunction: "", colorHeader:"")
+    </div>
+
+
+</div>
+

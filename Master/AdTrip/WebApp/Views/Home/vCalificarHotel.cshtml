@@ -1,0 +1,233 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vCalificarHotel.js"></script>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="wrapper">
+    <section class="page-cover" id="cover-hotel-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="col-lg-10 text-center border-light mt-3">
+                        <img style="height: 300px; width: 300px ;"
+                             id="P_mngFoto" src="https://res.cloudinary.com/datatek/image/upload/abkv6zreiqglxvd97l6s">
+                    </div>
+                </div>
+
+                <div class="calificacion">
+                    <h2 class="page-title" id="P_NombreHotel">Calificación</h2>
+                    <div class="col-md-5">
+                        <h5 class="page-item" id="P_Votos">
+                            <li class="list-inline-item rating" id="P_lista_votos">
+                                <p class="voto">¿Te gustó la estadía en nuestro hotel? ¡Danos una opinión! </p>
+                                <span class="rating_stars rating_0">
+                                    <span class='s' data-low='0.5' data-high='1'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                    <span class='s' data-low='1.5' data-high='2'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                    <span class='s' data-low='2.5' data-high='3'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                    <span class='s' data-low='3.5' data-high='4'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                    <span class='s' data-low='4.5' data-high='5'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+
+                                    <span class='r r1' data-rating='1' data-value='1'></span>
+
+
+                                    <span class='r r2' data-rating='2' data-value='2'></span>
+
+                                    <span class='r r3' data-rating='3' data-value='3'></span>
+
+                                    <span class='r r4' data-rating='4' data-value='4'></span>
+
+                                    <span class='r r5' data-rating='5' data-value='5'></span>
+                                </span>
+                                <div class="values">
+
+                                    <div>
+                                        <p>Tu calificación fue de</p><input type="text" name="rating" id="rating_val" value="0" disabled />
+                                    </div>
+                                    <div>
+                                        <p>ID RESERVA TEST</p><input type="number" id="IdReserva" value="0" />
+                                    </div>
+                                    @*<button type="button" class="btn btn-info" style="
+                                                margin-left: 5px;
+                                                width: 125px;
+                                                margin-right: 5px;
+                                                border-radius: 5px;
+                                                opacity: 0.9;
+                                                margin-top: 22px;
+                                                background-color: mediumaquamarine;
+                                                color: black;
+                                                font-size: 12px;">
+                                            Enviar calificación
+                                        </button>*@
+                                    <div class="align-content-center mt-3">
+                                        @Html.CtrlButton(label:"Calificar", viewName:"vCalificarHotel", type:"button",id:"btnCalificar",onClickFunction: "CalificarHotel",
+                                       buttonType:"info")
+                                    </div>
+                                </div>
+                            </li>
+                        </h5>
+                    </div>
+                </div>
+                <h5 class="favorito">
+                    <p>¡Agreganos a tu lista de hoteles favoritos!</p>
+                    <form id="favorite_form">
+                        <span class="favorite_heart">
+
+                            <button type="button" class="btn btn-danger btn-circle btn-xl">
+
+                                <i class="fa fa-heart"></i>
+                            </button>
+                        </span>
+                    </form>
+                </h5>
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section><!-- end page-cover -->
+</div>
+<style>
+
+    .rating_stars {
+        margin-top: 15px;
+        display: inline-block;
+        font-size: 20px;
+        font-weight: 200;
+        color: #918f8f;
+        position: relative;
+    }
+
+        .rating_stars span .fa, .rating_stars span.active-low .fa-star-o, .rating_stars span.active-high .fa-star-o {
+            display: none;
+        }
+
+        .rating_stars span .fa-star-o {
+            display: inline-block;
+        }
+
+        .rating_stars span.s.active-high .fa-star {
+            display: inline-block;
+            color: aquamarine;
+        }
+
+        .rating_stars span.s.active-low .fa-star-half-o {
+            display: inline-block;
+            color: aquamarine;
+        }
+
+        .rating_stars span.r {
+            position: absolute;
+            top: 0;
+            height: 20px;
+            width: 10px;
+            left: 0;
+        }
+
+
+
+            .rating_stars span.r.r1 {
+                left: 4px;
+                width: 11px;
+            }
+
+
+            .rating_stars span.r.r2 {
+                left: 26px;
+                width: 12px;
+            }
+
+
+
+            .rating_stars span.r.r3 {
+                left: 49px;
+                width: 11px;
+            }
+
+
+
+            .rating_stars span.r.r4 {
+                left: 71px;
+                width: 12px;
+            }
+
+
+
+            .rating_stars span.r.r5 {
+                left: 94px;
+                width: 12px;
+            }
+
+
+
+    .values p {
+        display: inline-block;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    input {
+        width: 40px;
+        text-align: center;
+        opacity: 0.5;
+    }
+
+    .values {
+        margin-top: 20px;
+    }
+
+    .voto {
+        font-size: 15px;
+        color: aliceblue;
+    }
+
+    .calificacion {
+        text-align: center;
+        margin-left: 57px;
+        margin-top: 41px;
+        width: 709px;
+    }
+</style>
+<style>
+
+    .favorite_heart {
+        direction: rtl;
+        font-size: 60px;
+        unicode-bidi: bidi-override;
+        display: inline-block;
+        margin-left: 68px;
+        margin-top: 17px;
+    }
+
+    .btn-circle.btn-xl {
+        margin-left: -62px;
+        margin-top: 20px;
+        width: 55px;
+        height: 55px;
+        padding: 10px 10px;
+        border-radius: 40px;
+        font-size: 34px;
+        line-height: 0.33;
+    }
+
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.42857;
+    }
+
+    .favorito {
+        text-align: center;
+        display: inline-block;
+        position: absolute;
+        left: 924px;
+        top: 161px;
+        width: 219px;
+    }
+
+        .favorito p {
+            color: white;
+            font-size: 15px;
+        }
+</style>

@@ -1,0 +1,153 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vUsuarios.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Sección <span>Usuarios</span></h2>
+                        <p>Esta vista permite dar mantenimiento a los usuarios. </p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    @*<li class="nav-item" role="presentation" data-div="registrarRoles">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>*@
+                                    <li class="nav-item active" role="presentation" data-div="listaUsuarios">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaUsuarios" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vUsuarios", id: "tblUsuarios", title: "Lista de usuarios",
+                                    columnsTitle: "Identificación,Primer nombre,Primer apellido,Correo,Teléfono,Calificación,Estado", 
+                                    ColumnsDataName: "Identificacion,PrimerNombre,PrimerApellido,Correo,Telefono,Calificacion,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+                                </div>
+                                <!--===== termina vista listar =====-->
+
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarUsuarios" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+                                                            <h5>Personal</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtIdentificacion", type: "text", label: "Identificación",
+                                                                            placeHolder: "Identificación", columnDataName: "Identificacion")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtPrimerNombre", type: "text", label: "Primer Nombre",
+                                                                        placeHolder:"Primer nombre", columnDataName: "PrimerNombre")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtSegundoNombre", type: "text", label: "Segundo nombre",
+                                                                        placeHolder:"Segundo nombre", columnDataName: "SegundoNombre")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtPrimerApellido", type: "text", label: "Primer apellido",
+                                                                        placeHolder:"Primer apellido", columnDataName: "PrimerApellido")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtSegundoApellido", type: "text", label: "Segundo apellido",
+                                                                        placeHolder:"Segundo apellido", columnDataName: "SegundoApellido")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Contacto</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-8">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtCorreo", type: "email", label: "Correo",
+                                                                            placeHolder: "Correo", columnDataName: "Correo")
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtTelefono", type: "text", label: "Teléfono",
+                                                                            placeHolder: "Teléfono", columnDataName: "Telefono")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Dirección</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-4">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlDropDown(id: "txtProvincia", label: "Provincia", listId: "LST_PROVINCIA", columnDataName: "Provincia")
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlDropDown(id: "txtCanton", label: "Cantón", listId: "LST_CANTON", columnDataName: "Canton")
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlDropDown(id: "txtDistrito", label: "Distrito", listId: "LST_DISTRITO", columnDataName: "Distrito")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-12">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtDireccionExacta", type: "text", label: "Dirección exacta",
+                                                                            placeHolder: "Dirección Exacta", columnDataName: "DireccionExacta")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <h5>Otros</h5>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtCalificacion", type: "text", label: "Calificación",
+                                                                            placeHolder: "Calificación", columnDataName: "Calificacion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlDropDown(id: "txtEstado", label: "Estado", listId: "LST_ESTADO_USUARIOS", columnDataName: "ValorEstado")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vUsuarios", id: "btnModificar", type: "button", label: "Modificar", onClickFunction: "Update", buttonType: "info")
+                                            @*@Html.CtrlButton(viewName: "vUsuarios", id: "btnEliminar", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

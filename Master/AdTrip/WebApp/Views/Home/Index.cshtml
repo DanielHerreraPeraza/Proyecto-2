@@ -1,0 +1,274 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboard-heading text-center">
+    <h2>¡Bienvenidos a  <span>ADTRIP!</span></h2>
+    <p>Con nosotros vivirás las mejores experiencias!</p>
+
+</div>
+<!--=============== Hoteles ===============-->
+<section id="tour-offers" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="owl-carousel owl-theme owl-custom-arrow" id="owl-tour-offers">
+                    <div class="item">
+                        <div class="main-block tour-block">
+
+                            <div class="main-img">
+                                <a href="">
+                                    <img src="~/Content/imgs/hoteles.jpg" class="img-responsive" />
+                                </a>
+                            </div><!-- end offer-img -->
+
+                            <div class="main-info tour-info">
+                                <div class="main-title tour-title">
+                                    <a href="">Hoteles</a>
+                                    <p>¡Te ofrecemos los mejores hoteles del país!</p>
+                                    <div class="rating">
+                                    </div>
+                                </div><!-- end tour-title -->
+                            </div><!-- end tour-info -->
+                            <div class="view-all text-center ">
+                                <a href="@Url.Action("vHoteles","Home")" class="btn btn-black">Ver hoteles</a>
+                            </div><!-- end view-all -->
+                        </div><!-- end tour-block -->
+                    </div><!-- end item -->
+
+                    <div class="item">
+                        <div class="main-block tour-block">
+                            <div class="main-img">
+                                <a href="">
+                                    <img src="~/Content/imgs/alamar.jpg" class="img-responsive" />
+                                </a>
+                            </div><!-- end offer-img -->
+                            <div class="main-info tour-info">
+                                <div class="main-title tour-title">
+                                    <a href="">Hotel Alamar</a>
+                                    <p>Paseo de los turistas, Puntarenas.</p>
+
+                                </div><!-- end tour-title -->
+                            </div><!-- end tour-info -->
+                            <div class="view-all text-center">
+                                <a href="@Url.Action("vRegistroSolicitudHotel","Home")" class="btn btn-black">Registrar Hotel</a>
+                            </div><!-- end view-all -->
+                        </div><!-- end tour-block -->
+                    </div><!-- end item -->
+
+                </div><!-- end owl-tour-offers -->
+
+
+            </div><!-- end columns -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+
+</section><!-- end tour-offers -->
+<!--=============== INICIO ===============-->
+
+<section id="tour-offers" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="owl-carousel owl-theme owl-custom-arrow" id="owl-tour-offers">
+                    <div class="item">
+                        <div class="main-block tour-block">
+                            <div class="main-img">
+                                <a href="">
+                                    <img src="~/Content/imgs/inicio.jpg" class="img-responsive" width="600" height="520">
+                                </a>
+                            </div><!-- end offer-img -->
+                        </div><!-- end tour-block -->
+                    </div><!-- end item -->
+                </div>
+                <div class="page-heading">
+                    <h2>Ingreso</h2>
+                    <p>¡Te invitamos a ser parte de nuestra plataforma, registráte!</p>
+                    <hr class="heading-line" />
+                    <div class="view-all text-center">
+                        <a href="@Url.Action("vRegistroUsuarios","Home")" class="btn btn-black">Crear cuenta</a>
+                    </div><!-- end view-all -->
+                </div><!-- end page-heading -->
+            </div><!-- end tour-title -->
+        </div><!-- end tour-info -->
+    </div><!-- end tour-block -->
+
+</section><!-- end tour-offers -->
+<!--=============== VIDEO ===============-->
+<section id="contact-form" class="section-padding p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <div class="page-heading white-heading">
+                    <h3>¡Conocé un poco más de nuestra plataforma!</h3>
+                    <hr class="heading-line" />
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7">
+                        <form>
+                            <div class="row">
+                                <embed src="https://res.cloudinary.com/datatek/video/upload/v1565589612/Mi_video_czrkrx.mp4" width="730" height="350" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 align-middle" style=" margin-top: 10%;">
+                        <div class="contact-block ">
+                            <p>Te presentamos un poco del proceso de creación de nuestra aplicación y el propósito de ella.</p>
+                            <span class="border-shape"></span>
+                        </div><!-- end address-block -->
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+            </div><!-- end columns -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end contact-form -->
+@*<!--=================== PACKAGES ================-->
+<section id="tour-packages" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-heading">
+                    <h2>Promociones</h2>
+                    <p>También te ofreceremos los mejores paquetes y promociones.</p>
+                    <hr class="heading-line" />
+                </div><!-- end page-heading -->
+                <div class="row" id="tour-package-tables">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center">
+                        <div class="package tour-package">
+                            <div class="t-pkg-heading">
+                                <h2 class="t-pkg-title">Simple</h2>
+                                <h2 class="t-pkg-price">$100 / Por noche.</h2>
+                            </div><!-- end t-pkg-heading -->
+                            <div class="pkg-features">
+                                <ul class="list-unstyled text-center">
+                                    <li>Desayuno</li>
+                                    <li>WiFi</li>
+                                    <li>Almuerzo</li>
+                                    <li>Vista al mar</li>
+                                    <li>Uso de instalaciones</li>
+                                    <li>Cena</li>
+                                </ul>
+                                <button class="btn">Seleccionar</button>
+                            </div><!-- end features -->
+                        </div><!-- end tour-package -->
+                    </div><!-- end columns -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center">
+                        <div class="package tour-package  best-package">
+                            <div class="t-pkg-heading">
+                                <h2 class="t-pkg-title">Doble</h2>
+                                <h2 class="t-pkg-price">$180 / Por noche</h2>
+                            </div><!-- end t-pkg-heading -->
+                            <div class="pkg-features">
+                                <ul class="list-unstyled text-center">
+                                    <li>Desayuno</li>
+                                    <li>Almuerzo</li>
+                                    <li>Spa</li>
+                                    <li>WiFi</li>
+                                    <li>Jacuzzi</li>
+                                    <li>Cena</li>
+                                </ul>
+                                <button class="btn">Seleccionar</button>
+                            </div><!-- end features -->
+                        </div><!-- end tour-package -->
+                    </div><!-- end columns -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center">
+                        <div class="package tour-package">
+                            <div class="t-pkg-heading">
+                                <h2 class="t-pkg-title">Familiar</h2>
+                                <h2 class="t-pkg-price">$220 / Por noche</h2>
+                            </div><!-- end t-pkg-heading -->
+                            <div class="pkg-features">
+                                <ul class="list-unstyled text-center">
+                                    <li>Desayuno, almuerzo y cena</li>
+                                    <li>Spa y otros servicios</li>
+                                    <li>Servicio a la habitación</li>
+                                    <li>WiFi gratis</li>
+                                    <li>Habitación grande</li>
+                                    <li>Piscina privada</li>
+                                </ul>
+                                <button class="btn">Seleccionar</button>
+                            </div><!-- end features -->
+                        </div><!-- end tour-package -->
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+            </div><!-- end columns -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section><!-- end tour-packages -->
+<!--=============== CONTACT-FORM ===============-->*@
+@*<section id="contact-form" class="section-padding p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <div class="page-heading white-heading">
+                    <h2>Contáctenos</h2>
+                    <hr class="heading-line" />
+                </div><!-- end page-heading -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7">
+                        <form>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nombre" required />
+                                        <span><i class="fa fa-user"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Apellido" required />
+                                        <span><i class="fa fa-user"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email" required />
+                                <span><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Tema" required />
+                                <span><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="7" placeholder="Mensaje"></textarea>
+                                <span><i class="fa fa-pencil"></i></span>
+                            </div>
+                            <button class="btn btn-black">Enviar</button>
+                        </form>
+                    </div><!-- end columns -->
+                    <div class="col-xs-12 col-sm-12 col-md-5">
+                        <div class="contact-block">
+                            <span><i class="fa fa-map-marker"></i></span>
+                            <p>Universidad Cenfotec.Montes de Oca</p>
+                            <span class="border-shape"></span>
+                        </div><!-- end address-block -->
+                        <div class="contact-block">
+                            <span><i class="fa fa-phone"></i></span>
+                            <p>+506 6205 7814</p>
+                            <span class="border-shape"></span>
+                        </div><!-- end address-block -->
+                        <div class="contact-block">
+                            <span><i class="fa fa-envelope"></i></span>
+                            <p>grupodatatek@gmail.com</p>
+                            <span class="border-shape"></span>
+                        </div><!-- end address-block -->
+                    </div><!-- end columns -->
+                </div><!-- end row -->
+            </div><!-- end columns -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>*@
+<style>
+
+    .section-padding {
+        padding-top: 50px;
+        padding-bottom: 0px;
+        margin-top: 50px;
+    }
+
+    .view-all {
+        margin-top: 10px;
+    }
+</style>

@@ -1,0 +1,12 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vListadoHabitaciones.js"></script>
+<script src="~/Scripts/Views/vCarrito.js"></script>
+@{
+    ViewBag.Title = "vListadoHabitaciones";
+}
+
+<div style="margin-top: 20px;" id="listarHoteles" class="d-inline">
+    @Html.CtrlTable(viewName: "vListadoHabitaciones", id: "tblTipoHabitaciones", title: "Habitaciones",
+    columnsTitle: "Habitaciones",
+    ColumnsDataName: "Codigo,Nombre,NumCamas,CupoMax,Precio,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+</div>

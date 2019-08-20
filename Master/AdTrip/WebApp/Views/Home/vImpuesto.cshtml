@@ -1,0 +1,167 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vImpuesto.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="innerpage-wrapper">
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Sección <span>Impuestos</span></h2>
+                        <p>Mantenimiento de impuestos</p>
+                        <p>Le presentamos el mantenimiento de impuestos, aquí tiene permitido registrar nuevos impuestos y tener un seguimiento de ellos.</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" role="presentation" data-div="registrarImpuesto">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                    </li>
+                                    <li class="nav-item active" role="presentation" data-div="listaImpuesto">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listaImpuesto" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vImpuesto", id: "tblImpuesto", title: "Lista de impuestos",
+                                    columnsTitle: "Nombre,Porcentaje,Descripción,Estado", ColumnsDataName: "Nombre,Porcentaje,Descripcion,Estado", onSelectFunction: "BindFields", colorHeader:"red")
+
+
+                                </div>
+                                <!--===== termina vista listar =====-->
+                                <!--===== inicia vista registrar =====-->
+                                <div style="margin-top: 20px;" id="crearImpuesto" class="d-none">
+                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                                <h3>Registrar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmCreate" method="get" action=""> 
+                                            <div class="row align-content-sm-center">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            
+                                                                @Html.CtrlIconInput(id: "txtCodigoR", type: "number", icon: "fa fa-id-card", required: true,
+                                                                        placeHolder: "Código", columnDataName: "Codigo")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtNombreR", type: "text", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Nombre", columnDataName: "Nombre")
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlIconInput(id: "txtPorcentajeR", type: "number", icon: "fa fa-id-card", required: true,
+                                                                    placeHolder: "Porcentaje", columnDataName: "Porcentaje")
+                                                        </div>
+                                                 
+                                                 
+                                                        <div class="col-lg-6">
+                                                            @Html.CtrlTextArea(id: "txtDescripcionR", _class: "", type: "text", label:"Descripción",
+                                                                    placeHolder:"Descripción", columnDataName: "Descripcion", rows: 1)
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    @*<div class="form-row">
+                                                            <legend class="col-form-label col-sm-2 pt-0">Estado</legend>
+                                                            <div class="radio">
+                                                                <label class="radio-inline"><input type="radio" value="1" name="optradio" ColumnDataName="Estado">Habilitado</label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label class="radio-inline"><input type="radio" value="2" name="optradio" ColumnDataName="Estado">Deshabilitado</label>
+                                                            </div>
+                                                        </div>*@
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vImpuesto", id: "btnCreate", type:"button", label: "Registrar", onClickFunction: "ValidarInputsCrear", buttonType: "info")
+
+                                        </div>
+                                    </div><!-- end form-content -->
+                                </div>
+                                <!--===== termina vista registrar =====-->
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarImpuesto" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor complete la información que se le solicita a continuación.</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition" method="get" action="">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+                                                       
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled/>
+                                                                    @Html.CtrlInput(id: "txtCodigo", type: "number", label: "Código",
+                                                                            placeHolder: "Código", columnDataName: "Codigo")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtNombre", type: "text", label: "Nombre",
+                                                                        placeHolder: "Nombre", columnDataName: "Nombre")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlInput(id: "txtPorcentaje", type: "number", label: "Porcentaje",
+                                                                        placeHolder: "Porcentaje", columnDataName: "Porcentaje")
+                                                            </div>
+                                                        
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlTextArea(id: "txtDescripcion", type: "text", label: "Descripción",
+                                                                        placeHolder:"Descripción", columnDataName: "Descripcion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                @Html.CtrlDropDown(id: "txtEstado", listId: "LST_ESTADO_TIPOS_IMPUESTO", label: "Estado", columnDataName: "IdEstado")
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+
+                                            @Html.CtrlButton(viewName: "vImpuesto", id: "btnUpdate", type: "button", label: "Modificar", onClickFunction: "ValidarInputsModificar", buttonType: "info")
+                                            @*@Html.CtrlButton(viewName: "vImpuesto", id: "btnDelete", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")*@
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+
+                                <div style="margin-top: 20px;" id="modificarImpuesto" class="d-none">
+                                    <p>Modificar</p>
+                                </div>
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section>

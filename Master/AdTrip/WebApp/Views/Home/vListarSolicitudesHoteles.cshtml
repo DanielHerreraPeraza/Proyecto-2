@@ -1,0 +1,141 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vListarSolicitudesHoteles.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--===== INNERPAGE-WRAPPER ====-->
+<section class="innerpage-wrapper">8
+    <div id="dashboard" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="dashboard-heading">
+                        <h2>Lista de solicitudes de  <span>Hoteles</span></h2>
+                        
+                        <p>Esta vista permite dar mantenimiento a las solicitudes de hotel.</p>
+                    </div><!-- end dashboard-heading -->
+
+                    <div class="dashboard-wrapper mb-lg-5">
+                        <div class="row">
+
+
+                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                <ul class="nav nav-tabs">
+                                    @*<li class="nav-item" role="presentation" data-div="registrarRoles">
+                                            <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Registrar</a>
+                                        </li>*@
+                                    <li class="nav-item active" role="presentation" data-div="listarSolicitudes">
+                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                    </li>
+                                </ul>
+                            </div><!-- end columns -->
+
+
+                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                <!--===== inicia vista listar =====-->
+                                <div style="margin-top: 20px;" id="listarSolicitudes" class="d-inline">
+                                    @Html.CtrlTable(viewName: "vListarSolicitudesHoteles", id: "tblSolicitudesHoteles", title: "Selecciona una solicitud",
+     columnsTitle: "Cedula jurídica,Empresa dueña,Nombre del hotel,Usuario,Estado",
+     ColumnsDataName: "CedulaJuridica,EmpresaDuenna,Nombre,NombreUsuario,Estado", onSelectFunction: "BindFields", colorHeader: "red")
+
+                                </div>
+                                <!--===== termina vista listar =====-->
+
+                                <!--===== inicia vista modificar =====-->
+                                <div style="margin-top: 20px;" id="modificarSolicitudes" class="d-none">
+                                    <div class="custom-form custom-form-fields text-center">
+                                        <div class="container-fluid">
+                                            <div class="row justify-content-center">
+                                                <h3>Modificar</h3>
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <p>Por favor ingrese la membresía que se le cobrará al hotel</p>
+                                            </div>
+                                        </div>
+
+                                        <form class="" id="frmEdition">
+                                            <div class="row align-content-center">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-row">
+                                                        <div class="row">
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtCodigo", type: "number", label: "Código", columnDataName: "CodigoSolicitud")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtEstado", type: "text", label: "Estado", columnDataName: "Estado")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtNombre", type: "text", label: "Nombre del hotel", columnDataName: "Nombre")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtCedulaJ", type: "text", label: "Cédula jurídica", columnDataName: "CedulaJuridica")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtEmpresaD", type: "text", label: "Empresa dueña", columnDataName: "EmpresaDuenna")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtDireccion", type: "text", label: "Dirección exacta", columnDataName: "Direccion")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlTextArea(id: "txtDescripcion", type: "textArea", label: "Descripción", columnDataName: "Descripcion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @*@Html.CtrlInput(id: "txtCadena", type: "text", label: "Cadena", columnDataName: "Cadena")*@
+                                                                    @Html.CtrlInput(id: "txtCadena", type: "text", label: "Cadena", columnDataName: "Cadena")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtCLasificacion", type: "number", label: "Clasificación internacional(estrellas)", columnDataName: "Clasificacion")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtIdUsuario", type: "text", label: "Identificación", columnDataName: "IdUsuario")
+                                                            </div>
+                                                            <div class="w-100"></div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtNombreUsuario", type: "text", label: "Nombre", columnDataName: "NombreUsuario")
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <fieldset disabled />
+                                                                    @Html.CtrlInput(id: "txtCorreoUsuario", type: "text", label: "Correo electrónico", columnDataName: "CorreoUsuario")
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                @Html.CtrlInput(id: "txtMembrecia", type: "number", label: "Ingrese el valor en dolares de la membresía que se cobrará cuando registre el hotel:", columnDataName: "Membrecia")
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="align-content-center">
+                                            @Html.CtrlButton(viewName: "vListarSolicitudesHoteles", id: "btnAprobar", type: "button", label: "Aprobar", onClickFunction: "AprobarSolicitud", buttonType: "success")
+                                            @Html.CtrlButton(viewName: "vListarSolicitudesHoteles", id: "btnRechazar", type: "button", label: "Rechazar", onClickFunction: "RechazarSolicitud", buttonType: "danger")
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--===== termina vista modificar =====-->
+
+                            </div><!-- end columns -->
+
+                        </div><!-- end row -->
+                    </div><!-- end dashboard-wrapper -->
+                </div><!-- end columns -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end dashboard -->
+</section><!-- end innerpage-wrapper -->

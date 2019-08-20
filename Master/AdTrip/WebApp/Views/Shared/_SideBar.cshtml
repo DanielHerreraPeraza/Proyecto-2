@@ -1,0 +1,83 @@
+﻿<div class="sidenav-content">
+    <!-- Sidebar  -->
+    <nav id="sidebar" class="sidenav">
+        <h2 id="web-name"><span><i class="fa fa-plane"></i></span>AdTrip</h2>
+
+        <div id="main-menu">
+            <div id="dismiss">
+                <button class="btn" id="closebtn">&times;</button>
+            </div>
+            <div class="list-group panel">
+                <a href="/Home/vRoles" class="items-list" aria-expanded="false">
+                    <span><i class="fa fa-home link-icon"></i></span>Home<span><i class="fa fa-chevron-right arrow"></i></span>
+                </a>
+
+                <a class="items-list" href="#flights-links" data-toggle="collapse"><span><i class="fa fa-plane link-icon"></i></span>Flights<span><i class="fa fa-chevron-right arrow"></i></span></a>
+                <div class="collapse sub-menu" id="flights-links">
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list" href="#hotels-links" data-toggle="collapse"><span><i class="fa fa-building link-icon"></i></span>Hotels<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu" id="hotels-links">
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list" href="#tours-links" data-toggle="collapse"><span><i class="fa fa-globe link-icon"></i></span>Tours<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu" id="tours-links">
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list" href="#cruise-links" data-toggle="collapse"><span><i class="fa fa-ship link-icon"></i></span>Cruise<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu" id="cruise-links">
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list" href="#cars-links" data-toggle="collapse"><span><i class="fa fa-car link-icon"></i></span>Cars<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu" id="cars-links">
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list active" href="#features-links" data-toggle="collapse"><span><i class="fa fa-puzzle-piece link-icon"></i></span>Features<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu mega-sub-menu" id="features-links">
+                    <a class="items-list" href="#header-style-links" data-toggle="collapse">Header<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="header-style-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                    <a class="items-list" href="#page-title-style-links" data-toggle="collapse">Page Title<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="page-title-style-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                    <a class="items-list" href="#footer-style-links" data-toggle="collapse">Footer<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="footer-style-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                    <a class="items-list" href="#f-blog-links" data-toggle="collapse">Blog<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="f-blog-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                    <a class="items-list" href="#f-gallery-links" data-toggle="collapse">Gallery<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="f-gallery-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                    <a class="items-list active" href="#f-forms-links" data-toggle="collapse">Forms<span><i class="fa fa-caret-down arrow"></i></span></a>
+                    <div class="collapse sub-menu mega-sub-menu-links" id="f-forms-links">
+                        <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    </div>
+                </div><!-- end sub-menu -->
+
+                <a class="items-list" href="#pages-links" data-toggle="collapse"><span><i class="fa fa-clone link-icon"></i></span>Pages<span><i class="fa fa-chevron-down arrow"></i></span></a>
+                <div class="collapse sub-menu" id="pages-links">
+                    <div class="list-group-heading ">Standard <span>Pages</span></div>
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    <div class="list-group-heading ">User <span>Dashboard</span></div>
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    <div class="list-group-heading ">Special <span>Pages</span></div>
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                    <div class="list-group-heading ">Extra <span>Pages</span></div>
+                    <a @Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "items-list" })</a>
+                </div><!-- end sub-menu -->
+
+            </div><!-- End list-group panel -->
+        </div><!-- End main-menu -->
+    </nav>
+</div><!-- End sidenav-content -->

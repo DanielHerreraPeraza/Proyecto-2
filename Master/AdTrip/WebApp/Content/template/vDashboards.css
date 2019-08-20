@@ -1,0 +1,18 @@
+﻿@media only screen and (max-width: 945px) {
+
+    #chartReporteCantHabTipo {
+        display: inline-block;
+        height: 50px;
+        float: none;
+        width: 100px;
+    }
+
+
+    #chartDisponHabitaciones {
+        height: 260px;
+        float: none;
+        width: 521px;
+        margin-top: 400px;
+    }
+   
+}

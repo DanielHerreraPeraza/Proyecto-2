@@ -1,0 +1,80 @@
+﻿<nav class="navbar navbar-expand-xl sticky-top navbar-custom main-navbar p-1" id="mynavbar-1">
+    <div class="container">
+
+        <a href="#" class="navbar-brand py-1 m-0"><span><i class="fa fa-suitcase"></i>AD</span>TRIP</a>
+
+        <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="sidebarCollapse">
+            <i class="fa fa-navicon py-1"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="myNavbar1">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown active">
+                    <a>@Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-link" })</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown">Administrador<span><i class="fa fa-angle-down"></i></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Registro usuario", "vRegistroUsuarios", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Usuarios", "vUsuarios", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Roles", "vRoles", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Dashboard", "vDashboardAdministrador", "Home", new { @class = "dropdown-item" })</li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown">Gerente<span><i class="fa fa-angle-down"></i></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Hoteles", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Servicios", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Productos", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Solicitudes", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Dashboard", "vDashboardGerente", "Home", new { @class = "dropdown-item" })</li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown">Cliente<span><i class="fa fa-angle-down"></i></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Hoteles", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Promociones", "Index", "Home", new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Servicios", "Index", "Home", new { @class = "dropdown-item" })</li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages<span><i class="fa fa-angle-down"></i></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right row mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="dropdown-item">
+                            <div class="row">
+                                <div class="col-md">
+                                    <ul class="list-unstyled">
+                                        <li class="dropdown-item dropdown-header">Standard <span>Pages</span></li>
+                                        <li>@Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md">
+                                    <ul class="list-unstyled">
+                                        <li class=" dropdown-header">User <span>Dashboard</span></li>
+                                        <li>@Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md">
+                                    <ul class="list-unstyled">
+                                        <li class=" dropdown-header">Special <span>Pages</span></li>
+                                        <li>@Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md">
+                                    <ul class="list-unstyled">
+                                        <li class=" dropdown-header">Extra <span>Pages</span></li>
+                                        <li>@Html.ActionLink("Customers", "vCustomers", "Home", new { @class = "dropdown-item" })</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- end navbar collapse -->
+    </div><!-- End container -->
+</nav>

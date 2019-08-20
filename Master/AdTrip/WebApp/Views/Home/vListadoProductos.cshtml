@@ -1,0 +1,41 @@
+﻿@using WebApp.Helpers;
+<link href="~/Content/vCarritoStyle.css" rel="stylesheet" />
+<script src="~/Scripts/Views/vListadoProductos.js"></script>
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+
+@{
+    ViewBag.Title = "vListadoProductos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card-header mt-4 text-center">
+
+    <div id="aviso1"></div>
+    <h4>Productos</h4>
+</div>
+<div class="card-body">
+
+    <div class="containerCard" id="crds">
+        <div class="form-row">
+        </div>
+
+    </div>
+
+
+
+</div>
+<div id="edit-profile" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Comprar producto</h3>
+            </div><!-- end modal-header -->
+            <video id="preview"></video>
+            </div>
+        </div>
+        </div>
+

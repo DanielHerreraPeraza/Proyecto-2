@@ -1,0 +1,95 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vCarrito.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/vCarritoStyle.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+    <main>
+        <div class="basket">
+            <!--
+            <div class="basket-module">
+                <label for="promo-code">Digite un código de descuento</label>
+                <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+                <button class="promo-code-cta">Aplicar</button>
+            </div>-->
+
+            <div class="basket-labels">
+                <ul>
+                    <li class="item item-heading">Item</li>
+                    <li class="price">Precio</li>
+                    <li class="quantity">Cantidad</li>
+                    <li class="subtotal">Subtotal</li>
+                </ul>
+            </div>
+            <div class="basket-product">
+
+            </div>
+
+
+        </div>
+        <aside>
+
+            <div class="summary">
+                <div class="summary-total-items"><span class="total-items"></span> Producto(s) en el carrito</div>
+                <div class="summary-subtotal">
+                    <div class="subtotal-title">Subtotal</div>
+                    <div class="subtotal-value final-value" id="basket-subtotal"></div>
+                    <div class="summary-promo hide">
+                        <div class="promo-title">Promotion</div>
+                        <div class="promo-value final-value" id="basket-promo"></div>
+                    </div>
+                </div>
+                <!--
+                <div class="summary-delivery">
+                    <select name="delivery-collection" class="summary-delivery-selection">
+                        <option value="0" selected="selected">Select Collection or Delivery</option>
+                        <option value="collection">Collection</option>
+                        <option value="first-class">Royal Mail 1st Class</option>
+                        <option value="second-class">Royal Mail 2nd Class</option>
+                        <option value="signed-for">Royal Mail Special Delivery</option>
+                    </select>
+                </div>-->
+                <div class="summary-total">
+                    <div class="total-title">Total</div>
+                    <div class="total-value final-value" id="basket-total"></div>
+                </div>
+                <div class="summary-checkout text-center">
+                    @*<button id="btnCheckout" class="checkout-cta">Checkout</button>*@
+                    <a href="#add-card" data-toggle="modal">
+                        @Html.CtrlButton(viewName: "vCarrito", id: "btnCheckout", type: "button", label: "Proceder al pago", onClickFunction: "LoadCheckout", buttonType: "color")
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </main>
+</body>
+
+</html>
+
+<div id="add-card" class="modal custom-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div><!-- end modal-header -->
+
+            <div class="modal-body">
+                <form>
+                    <h2 class="modal-title text-center">Pago por Paypal</h2>
+
+                    <div class="mt-4 text-center" id="paypal-button"></div>
+                </form>
+            </div><!-- end modal-bpdy -->
+        </div><!-- end modal-content -->
+    </div><!-- end modal-dialog -->
+</div><!-- end add-card -->

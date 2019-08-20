@@ -1,0 +1,238 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/vPerfilReserva.js"></script>
+<script src="~/Scripts/Views/vLlavesQR.js"></script>
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="edit-profile" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center mb-0">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Titulo</h3>
+            </div>
+
+            @Html.CtrlInput(id: "idHabitacion", type: "info", label: "Habitacion")
+
+            <video id="preview"></video>
+        </div>
+    </div>
+</div>
+
+<button id="btnPuerta" class="btn-info btn-lg" data-toggle="modal" data-target="#edit-profile">Puerta</button>
+
+<button id="btnCheckout" class="btn-info btn-lg" data-toggle="modal" data-target="#edit-profile">Check out</button>
+
+<section class="innerpage-wrapper">
+    <div id="thank-you" class="innerpage-section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side">
+                    <div class="space-right">
+                        <div class="thank-you-note" style="border-bottom: none;">
+                            <h3>Detalle de su reserva</h3>
+                        </div><!-- end thank-you-note -->
+
+                        <div class="traveler-info">
+                            <h3 class="t-info-heading"><span><i class="fa fa-info-circle"></i></span>Información de la reserva</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Código de la reserva:</td>
+                                            <td id="codigo"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha de inicio:</td>
+                                            <td id="fechaInicio"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha de finalización:</td>
+                                            <td id="fechaFin"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cantidad de personas en reserva</td>
+                                            <td id="cantPersonas"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nombre de hotel</td>
+                                            <td id="nombreHotel"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Correo electrónico:</td>
+                                            <td id="correoHotel"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dirección de hotel:</td>
+                                            <td id="direccion"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teléfonos de hotel:</td>
+                                            <td id="telefonos"></td>
+                                        </tr>
+                                        <tr id="filaTipoHabitacion">
+                                            <td>Habitaciones:</td>
+                                            <td id="infoHabs"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Precio del pago:</td>
+                                            <td id="precioReserva"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div><!-- end table-responsive -->
+
+                            <div class="payment-method">
+                                <h3 class="t-info-heading"><span><i class="fa fa-credit-card"></i></span>Llaves QR</h3>
+                                <p>A continuación tiene la lista de la llaves de su reservación. Aquí podrá generar, cambiar el estado y eliminar estas llaves.</p>
+
+                                <section class="innerpage-wrapper">
+                                    <div id="dashboard" class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+
+                                                    <div class="dashboard-wrapper mb-lg-5">
+                                                        <div class="row">
+
+                                                            <div class="col-12 col-md-2 col-lg-2 dashboard-nav">
+                                                                <ul class="nav nav-tabs">
+                                                                    <li class="nav-item" role="presentation" data-div="registrarLlaveQR">
+                                                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Generar</a>
+                                                                    </li>
+                                                                    <li class="nav-item active" role="presentation" data-div="listaLlaveQR">
+                                                                        <a class="nav-link" href=""><span><i class="fa fa-user"></i></span>Listar</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div> @*end columns*@
+
+                                                            <div class="col-12 col-md-10 col-lg-10 booking-trips content" id="home_content" style="margin-top: 20px;">
+                                                                <!--===== inicia vista listar =====-->
+                                                                <div style="margin-top: 20px;" id="listaLlaveQR" class="d-inline">
+                                                                    @Html.CtrlTable(viewName: "vLlavesQR", id: "tblLlavesQR", title: "Lista de llaves",
+                                                                    columnsTitle: "Código,Usuario,Estado", ColumnsDataName: "CodigoQR,IdUsuario,ValorEstado", onSelectFunction: "BindFields", colorHeader:"red")
+
+
+                                                                </div>
+                                                                <!--===== termina vista listar =====-->
+                                                                <!--===== inicia vista registrar =====-->
+                                                                <div style="margin-top: 20px;" id="registrarLlaveQR" class="d-none">
+                                                                    <!--===== INNERPAGE-WRAPPER ====-->
+                                                                    <div class="custom-form custom-form-fields text-center">
+                                                                        <div class="container">
+                                                                            <div class="row justify-content-center">
+                                                                                <h3>Generar</h3>
+                                                                            </div>
+                                                                            <div class="row justify-content-center">
+                                                                                <p>Puede elegir si asociar la llave a su cuenta o generar una llave para un amigo socio de Adtrip</p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <form class="" id="frmCreate" method="get" action="">
+                                                                            <div class="row align-content-sm-center">
+                                                                                <div class="col-sm-12 text-center">
+                                                                                    <div class="form-row">
+                                                                                        <div class="col-lg-6">
+                                                                                            @Html.CtrlDropDown(id: "txtTipo", listId: "LST_TIPO_LLAVES", label: "Cuenta", columnDataName: "Tipo")
+
+                                                                                        </div>
+                                                                                        <div class="col-lg-6">
+                                                                                            @Html.CtrlIconInput(id: "txtCorreo", type: "text", icon: "fa fa-id-card", required: true,
+                                                                                                    placeHolder: "Correo del usuario", columnDataName: "Correo")
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <div class="align-content-center">
+                                                                            @Html.CtrlButton(viewName: "vLlavesQR", id: "btnCreate", type: "button", label: "Generar llave", onClickFunction: "ValidarInputsCrear", buttonType: "info")
+
+                                                                        </div>
+                                                                    </div><!-- end form-content -->
+                                                                </div>
+                                                                <!--===== termina vista registrar =====-->
+                                                                <!--===== inicia vista modificar =====-->
+                                                                <div style="margin-top: 20px;" id="modificarLlaveQR" class="d-none">
+                                                                    <div class="custom-form custom-form-fields text-center">
+                                                                        <div class="container-fluid">
+                                                                            <div class="row justify-content-center">
+                                                                                <h3>Cambiar estado </h3>
+                                                                            </div>
+                                                                            <div class="row justify-content-center">
+                                                                                <p>Las llaves inactivas no podrán comprar productos ni ingresar a la habitación</p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <form class="" id="frmEdition" method="get" action="">
+                                                                            <div class="row align-content-center">
+                                                                                <div class="col-lg-12 text-center">
+                                                                                    <div class="form-row">
+                                                                                        <div class="row">
+                                                                                            <div class="w-100"></div>
+
+                                                                                            <div class="col-lg-12">
+                                                                                                <img style="height: 250px; width: 250px ;margin-bottom: 20px;"
+                                                                                                     id="mngQR" src="https://res.cloudinary.com/datatek/image/upload/abkv6zreiqglxvd97l6s" download>
+                                                                                            </div>
+                                                                                            <div class="col-lg-6">
+                                                                                                <fieldset disabled />
+                                                                                                @Html.CtrlInput(id: "txtCodigo", type: "text", label: "Código",
+                                                                                                        placeHolder: "Código", columnDataName: "CodigoQR")
+                                                                                            </div>
+
+                                                                                            <div class="col-lg-6">
+                                                                                                <fieldset disabled />
+                                                                                                @Html.CtrlInput(id: "txtUsuario", type: "text", label: "Cuenta",
+                                                                                                        placeHolder: "Cuenta asociada", columnDataName: "IdUsuario")
+                                                                                            </div>
+
+                                                                                            <div class="col-lg-6">
+                                                                                                <fieldset disabled />
+                                                                                                @Html.CtrlInput(id: "txtReserva", type: "text", label: "Reservación",
+                                                                                                        placeHolder: "Reservación", columnDataName: "IdReserva")
+                                                                                            </div>
+                                                                                            <div class="col-lg-6">
+                                                                                                @Html.CtrlDropDown(id: "txtEstado", listId: "LST_ESTADO_LLAVES", label: "Estado", columnDataName: "EstadoQR")
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <div class="align-content-center">
+
+                                                                            @Html.CtrlButton(viewName: "vLlavesQR", id: "btnUpdate", type: "button", label: "Modificar", onClickFunction: "Update", buttonType: "info")
+                                                                            @*@Html.CtrlButton(viewName: "vLlavesQR", id: "btnDelete", type: "button", label: "Eliminar", onClickFunction: "Delete", buttonType: "danger")*@
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--===== termina vista modificar =====-->
+
+                                                                <div style="margin-top: 20px;" id="modificarLlavesQR" class="d-none">
+                                                                    <p>Modificar</p>
+                                                                </div>
+                                                            </div><!-- end columns -->
+
+                                                        </div><!-- end row -->
+                                                    </div><!-- end dashboard-wrapper -->
+                                                </div><!-- end columns -->
+                                            </div><!-- end row -->
+                                        </div><!-- end container -->
+                                    </div><!-- end dashboard -->
+                                </section>
+
+
+                            </div><!-- end payment-method -->
+                        </div><!-- end traveler-info -->
+                    </div><!-- end space-right -->
+                </div><!-- end columns -->
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end thank-you -->
+</section><!-- end innerpage-wrapper -->
